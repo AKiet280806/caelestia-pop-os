@@ -1,0 +1,2 @@
+-- Local monitor/layout customizations. Hyprmod can manage this file.
+-- No physical output name, resolution, refresh rate or GPU mode is assumed.

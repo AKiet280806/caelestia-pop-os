@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "platform": {
+    "id": "pop",
+    "version_id": "24.04",
+    "architecture": "x86_64"
+  },
+  "hyprland": {
+    "version": "0.57.0",
+    "commit": "0aa6745f705f2c4b0a5004eb019ef76e5bbdb426",
+    "deb_version": "0.57.0-1ppa3",
+    "header_file": "/usr/include/hyprland/src/version.h",
+    "headers_sha256": "af5f3374965be4586df3f1353e212ddcda0b03ec6055dcba02c0f677ea7cf3ec"
+  },
+  "qt": {
+    "version": "6.11.2",
+    "prefix": "/opt/qt6/6.11.2/gcc_64",
+    "modules": [
+      "qtimageformats",
+      "qtshadertools"
+    ]
+  },
+  "wayland": {
+    "version": "1.26.0",
+    "commit": "87cc8a8728a923fc57938faa81ba0e74f34ecdc7",
+    "url": "https://gitlab.freedesktop.org/wayland/wayland.git",
+    "prefix": "/opt/caelestia-wayland"
+  },
+  "python": {
+    "uv_version": "0.13.7",
+    "version": "3.13.18",
+    "aqtinstall_version": "3.3.0"
+  },
+  "shell": {
+    "version": "2.5.0",
+    "upstream_commit": "454f46da16ae75cc57f34adf48dea74db0fa5175",
+    "url": "https://github.com/caelestia-dots/shell.git"
+  },
+  "sources": {
+    "quickshell": {
+      "url": "https://github.com/outfoxxed/quickshell.git",
+      "commit": "41651d7dcd62a9400eb6f4f8a8580efe00901efb"
+    },
+    "cpptrace": {
+      "url": "https://github.com/jeremy-rifkin/cpptrace.git",
+      "commit": "3db8da80111171c219ab5839905771386bee06b3"
+    },
+    "m3shapes": {
+      "url": "https://github.com/soramanew/m3shapes.git",
+      "commit": "8a6fe8961749887d677700b6508e0c9249968b7e"
+    },
+    "cava": {
+      "url": "https://github.com/LukashonakV/cava.git",
+      "commit": "f03278ef9e5e7948fb206453d2f02758f8db216c"
+    },
+    "cli": {
+      "url": "https://github.com/caelestia-dots/cli.git",
+      "commit": "faadab3f59ff295c1058f6916b764ada6352ce99"
+    },
+    "hyprland_plugins": {
+      "url": "https://github.com/hyprwm/hyprland-plugins.git",
+      "commit": "d2427d4d15b36df40468f5a58bbd67cdba19835d"
+    },
+    "swappy": {
+      "url": "https://github.com/jtheoof/swappy.git",
+      "commit": "979d819aee18e02c759155b8b297850f25bdcda2"
+    },
+    "hyprmod": {
+      "url": "https://github.com/BlueManCZ/hyprmod.git",
+      "commit": "b475087af485bf53b33c4529ed616a220b512649"
+    }
+  },
+  "sass": {
+    "version": "1.107.1",
+    "url": "https://github.com/sass/dart-sass/releases/download/1.107.1/dart-sass-1.107.1-linux-x64.tar.gz",
+    "sha256": "6cefe78692d03ca53843394bb98de4dccf9a3d8ee5ece40be7316be852624003"
+  },
+  "fonts": [
+    {
+      "name": "Material Symbols Rounded",
+      "url": "https://raw.githubusercontent.com/google/material-design-icons/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/variablefont/MaterialSymbolsRounded%5BFILL,GRAD,opsz,wght%5D.ttf",
+      "sha256": "7e74e36533ccee12c2b81e75bfcf3ccf123d3bb7e7e46d65d94445f23db0c97c",
+      "filename": "MaterialSymbolsRounded.ttf",
+      "license_url": "https://raw.githubusercontent.com/google/material-design-icons/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/LICENSE",
+      "license_sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    {
+      "name": "Rubik",
+      "url": "https://raw.githubusercontent.com/google/fonts/2fe1e8c6b137fb13041a7cfca6fdcd8a910ea4dc/ofl/rubik/Rubik%5Bwght%5D.ttf",
+      "sha256": "1b3a7437ba2af80e465e773ed60c5036d1ba6ace492d89046dbcf18fb31e4e88",
+      "filename": "Rubik.ttf",
+      "license_url": "https://raw.githubusercontent.com/google/fonts/2fe1e8c6b137fb13041a7cfca6fdcd8a910ea4dc/ofl/rubik/OFL.txt",
+      "license_sha256": "472cbe7c25441df63e9c7864b43eb3c0f4b3df950c66a76224e6cfe1eae843fb"
+    },
+    {
+      "name": "Rubik Italic",
+      "url": "https://raw.githubusercontent.com/google/fonts/2fe1e8c6b137fb13041a7cfca6fdcd8a910ea4dc/ofl/rubik/Rubik-Italic%5Bwght%5D.ttf",
+      "sha256": "08c6c4018a5ada8b517407b46897e46cf6ebb106853fbd3e89addb51d3b59c62",
+      "filename": "Rubik-Italic.ttf",
+      "license_url": "https://raw.githubusercontent.com/google/fonts/2fe1e8c6b137fb13041a7cfca6fdcd8a910ea4dc/ofl/rubik/OFL.txt",
+      "license_sha256": "472cbe7c25441df63e9c7864b43eb3c0f4b3df950c66a76224e6cfe1eae843fb"
+    },
+    {
+      "name": "CaskaydiaCove NF",
+      "url": "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/CascadiaCode.zip",
+      "sha256": "1298bf92698afa06185cf1d05e6ae05f2d8a1e8c3cb45ddf4c3035168ab342a1",
+      "filename": "CascadiaCode.zip",
+      "license_url": "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/v3.5.1/patched-fonts/CascadiaCode/LICENSE",
+      "license_sha256": "82c05d6c53dfa0c9025985c19e371810020b74ed2c61d51d370f2a8ab2506d52"
+    }
+  ],
+  "python_constraints": {
+    "cli": {
+      "materialyoucolor": "3.0.4",
+      "pillow": "13.0.0"
+    },
+    "hyprmod": {
+      "hyprland-config": "0.9.19",
+      "hyprland-monitors": "0.9.0",
+      "hyprland-schema": "0.7.2",
+      "hyprland-socket": "0.12.2",
+      "hyprland-state": "0.4.7",
+      "pycairo": "1.29.2",
+      "PyGObject": "3.58.1"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+set -euo pipefail
+profile="${XDG_CONFIG_HOME:-$HOME/.config}/caelestia-pop-os/profile.env"
+if [[ -f $profile ]]; then
+    # This file is generated with shell-quoted values by the installer.
+    # shellcheck source=/dev/null
+    source "$profile"
+fi
+export XDG_CURRENT_DESKTOP=Hyprland XDG_SESSION_DESKTOP=Hyprland XDG_SESSION_TYPE=wayland
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
+unset LD_LIBRARY_PATH QML_IMPORT_PATH QML2_IMPORT_PATH
+if [[ ${CAELESTIA_VIETNAMESE:-0} == 1 ]]; then
+    export XMODIFIERS=@im=fcitx GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx
+fi
+if [[ -n ${HYPRLAND_INSTANCE_SIGNATURE:-} ]]; then
+    printf '%s\n' 'A Hyprland session is already active; refusing nested session startup.' >&2
+    exit 1
+fi
+state="${XDG_STATE_HOME:-$HOME/.local/state}/caelestia-pop-os"
+mkdir -p "$state"
+if [[ -f $state/session.log ]] && (( $(stat -c %s "$state/session.log") > 5242880 )); then
+    mv -f -- "$state/session.log" "$state/session.previous.log"
+fi
+cleanup() {
+    systemctl --user stop caelestia-codex-usage.service \
+        caelestia-clipboard@text.service caelestia-clipboard@image.service \
+        caelestia-polkit.service caelestia-shell.service >/dev/null 2>&1 || true
+    # Prevent a following COSMIC session from inheriting a stale compositor ID.
+    systemctl --user unset-environment HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY >/dev/null 2>&1 || true
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+/usr/bin/start-hyprland -- --config "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprland.lua" \
+    >> "$state/session.log" 2>&1

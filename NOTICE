@@ -1,0 +1,20 @@
+Caelestia for Pop!_OS
+
+Modified Caelestia Shell source is included under shell/ from
+https://github.com/caelestia-dots/shell
+base revision 454f46da16ae75cc57f34adf48dea74db0fa5175.
+Its original GPL-3.0 license and source notices are preserved.
+
+Caelestia CLI overrides derive from caelestia-dots/cli at the revision recorded
+in pins.json and retain GPL-3.0 terms. New installer, integration and native
+window-action code in this project is distributed under GPL-3.0-or-later.
+
+The installation design was informed by 12errh/caelestia-ubuntu; its MIT notice
+is preserved under licenses/caelestia-ubuntu-MIT.txt. This is an independent
+community adaptation, not an official System76 or Caelestia distribution.
+
+Separately downloaded dependencies retain their upstream licenses. See
+licenses/upstream-runtime-notices.md. Source pins and build scripts are
+provided; third-party binaries and user account credentials are not included.
+
+The original geometric wallpaper in assets/ is CC0-1.0 as described there.

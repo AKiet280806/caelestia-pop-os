@@ -1,0 +1,4 @@
+#%PAM-1.0
+# Use Pop!_OS / Ubuntu's existing authentication policy for screen unlock.
+@include common-auth
+@include common-account

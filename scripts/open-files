@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+set -euo pipefail
+profile="${XDG_CONFIG_HOME:-$HOME/.config}/caelestia-pop-os/profile.env"
+if [[ -f $profile ]]; then
+    # shellcheck source=/dev/null
+    source "$profile"
+fi
+if [[ -n ${CAELESTIA_FILE_MANAGER:-} ]]; then exec "$CAELESTIA_FILE_MANAGER" "${1:-$HOME}"; fi
+if command -v cosmic-files >/dev/null; then exec cosmic-files "${1:-$HOME}"; fi
+exec xdg-open "${1:-$HOME}"

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1600" viewBox="0 0 2560 1600">
+  <!-- Original Caelestia Pop!_OS abstract wallpaper. SPDX-License-Identifier: CC0-1.0 -->
+  <defs>
+    <linearGradient id="night" x2="1" y2="1"><stop stop-color="#101522"/><stop offset="1" stop-color="#232a43"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#363d68"/><stop offset="1" stop-color="#869bc5"/></linearGradient>
+    <linearGradient id="violet" x2="1" y2="1"><stop stop-color="#a598c0"/><stop offset="1" stop-color="#515c86"/></linearGradient>
+  </defs>
+  <path fill="url(#night)" d="M0 0h2560v1600H0z"/>
+  <circle cx="1900" cy="390" r="210" fill="#d5cde1" opacity=".88"/>
+  <path fill="url(#blue)" d="M-140 1220C300 570 730 520 1130 890s900 430 1570-90v1000H-140z"/>
+  <path fill="url(#violet)" d="M-180 1420C210 820 700 970 1080 1190s840 210 1640-220v830H-180z"/>
+  <path fill="#182036" opacity=".8" d="M-120 1660C380 1200 870 1290 1290 1430s940-80 1400-230v600H-120z"/>
+</svg>

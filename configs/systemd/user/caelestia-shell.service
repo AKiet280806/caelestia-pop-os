@@ -1,0 +1,21 @@
+[Unit]
+Description=Caelestia Shell for the Hyprland session
+ConditionEnvironment=HYPRLAND_INSTANCE_SIGNATURE
+ConditionEnvironment=XDG_CURRENT_DESKTOP=Hyprland
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+Environment=QML_IMPORT_PATH=/usr/local/lib/qt6/qml:/opt/qt6/6.11.2/gcc_64/qml
+Environment=QS_DISABLE_DMABUF=1
+Environment=QT_QPA_PLATFORM=wayland
+Environment=QT_RHI_BACKEND=opengl
+Environment=QSG_RENDER_LOOP=threaded
+Environment=XDG_CURRENT_DESKTOP=Hyprland
+Environment=XDG_SESSION_DESKTOP=Hyprland
+Environment="PATH=@DATA@/caelestia-pop-os/bin:%h/.local/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/usr/local/bin/qs -c caelestia -n
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=10

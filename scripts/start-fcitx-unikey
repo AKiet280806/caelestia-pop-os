@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+set -euo pipefail
+[[ ${XDG_CURRENT_DESKTOP:-} == Hyprland && -n ${HYPRLAND_INSTANCE_SIGNATURE:-} ]] || {
+    printf '%s\n' 'Fcitx startup is restricted to the active Hyprland session.' >&2
+    exit 1
+}
+export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+
+# Hyprland does not run XDG autostart entries by itself.
+if ! pgrep -u "$(id -u)" -x fcitx5 >/dev/null; then
+    /usr/bin/fcitx5 -d
+fi
+
+# Wait for its D-Bus controller before selecting the Vietnamese engine.
+for ((attempt = 0; attempt < 50; attempt++)); do
+    current=$(/usr/bin/fcitx5-remote -n 2>/dev/null || true)
+    if [[ -n "$current" ]]; then
+        /usr/bin/fcitx5-remote -s unikey
+        /usr/bin/fcitx5-remote -o
+        exit 0
+    fi
+    sleep 0.1
+done
+printf '%s\n' 'Fcitx5 did not become ready; Unikey was not activated.' >&2
+exit 1

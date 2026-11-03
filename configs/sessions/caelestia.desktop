@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Hyprland (Caelestia Pop!_OS)
+Comment=Caelestia Shell on Hyprland; COSMIC remains available
+Exec=/usr/local/bin/caelestia-pop-os-session
+TryExec=/usr/bin/start-hyprland
+Type=Application
+DesktopNames=Hyprland
