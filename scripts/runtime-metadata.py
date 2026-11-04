@@ -43,7 +43,7 @@ def validate() -> None:
     for source in [PINS["wayland"], *PINS["sources"].values()]:
         assert re.fullmatch(r"[0-9a-f]{40}", source["commit"]), source
         assert source["url"].startswith("https://"), source
-    for artifact in [PINS["sass"], *PINS["fonts"]]:
+    for artifact in [PINS["sass"], PINS["codexbar"], *PINS["fonts"]]:
         assert artifact["url"].startswith("https://"), artifact
         assert re.fullmatch(r"[0-9a-f]{64}", artifact["sha256"]), artifact
     for font in PINS["fonts"]:

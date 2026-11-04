@@ -115,6 +115,10 @@ Kiểm tra dung lượng tại `~/Videos/Recordings`. Nguồn âm thanh là moni
 
 Ban đầu tắt tự idle và vân tay. Thử Win+L/mở khóa mật khẩu khi còn đường về TTY/COSMIC. Xem PAM/log lock trước khi bật idle/suspend. Có cảm biến vân tay chưa có nghĩa xác thực đã hoạt động. Sleep/wake chưa được xác nhận cho mọi GPU.
 
-## Widget Codex không có số liệu
+## AI Usage không có số liệu
 
-Kiểm tra lệnh `codex` chính thức có trong PATH của phiên và đã đăng nhập tài khoản của bạn. Xem trạng thái backend mà không chép credential. RPC không trả quota, login hết hạn, tài khoản không hỗ trợ hoặc dữ liệu cũ phải hiện unavailable/stale; không suy ra hạn mức ChatGPT chat thường. Khi báo lỗi, chỉ gửi trạng thái/phiên bản đã lược thông tin riêng, không gửi `auth.json`, token hoặc cả thư mục trạng thái Codex.
+Kiểm tra nhà cung cấp đang chọn và nguồn đăng nhập theo [AI Usage](../AI-USAGE.md). Riêng Codex: kiểm tra lệnh `codex` chính thức có trong PATH của phiên và đã đăng nhập tài khoản của bạn. Xem trạng thái backend mà không chép credential. RPC không trả quota, login hết hạn, tài khoản không hỗ trợ hoặc dữ liệu cũ phải hiện unavailable/stale; không suy ra hạn mức ChatGPT chat thường. Khi báo lỗi, chỉ gửi trạng thái/phiên bản đã lược thông tin riêng, không gửi `auth.json`, token hoặc cả thư mục trạng thái Codex.
+
+Xem [AI Usage](../AI-USAGE.md) để chọn một nhà cung cấp và cấu hình nguồn usage.
+
+Service giữ tên cũ `caelestia-codex-usage.service` để tương thích; xem [AI Usage](../AI-USAGE.md) khi thiếu đăng nhập hoặc nguồn usage không được hỗ trợ.

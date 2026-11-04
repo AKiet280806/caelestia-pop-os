@@ -46,3 +46,19 @@ upstream redistribution requirements and provide corresponding source and
 notices where required. The source revisions and build commands needed to
 identify those sources are present in this repository and its generated build
 receipts.
+
+## Optional multi-provider usage runtime
+
+The AI Usage widget uses the official CodexBar CLI 0.83.0 Linux archive pinned
+by SHA256 in `pins.json`. CodexBar is MIT, Copyright (c) 2026 Peter Steinberger.
+Its license is preserved in `CodexBar-MIT.txt`; its resource bundle and
+`THIRD_PARTY_NOTICES` remain beside the installed executable. The binary is
+downloaded on opt-in installation and is not committed to this repository.
+Source: https://github.com/steipete/CodexBar/tree/v0.83.0
+
+YapCap was consulted as a UI reference for a common provider selector; no
+YapCap code, credential stores or COSMIC applet runtime were copied.
+
+## Provider logos
+
+The 13 selected provider logos under `shell/assets/ai-providers/` come from [Lobe Icons](https://github.com/lobehub/lobe-icons), revision `ea434b96e75813517b377825e01c0df61dee8836`, MIT licensed, copyright 2023 LobeHub. See [the license](Lobe-Icons-MIT.txt) and the adjacent `provenance.json` for original paths, hashes and the monochrome fill adaptation. Brand marks identify their respective services; their trademarks belong to their owners.

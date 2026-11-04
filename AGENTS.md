@@ -26,10 +26,10 @@ Do not start Caelestia inside COSMIC, restart the display manager, log the user 
 
 Never request or store a sudo password. Use the platform's normal authentication interaction. Never copy or commit Codex authentication, `.ssh`, tokens, clipboard contents, browser history, recordings, or private logs. Sanitize local usernames and home paths in public examples and issue evidence. Inspect staged content before committing; do not stage whole home/config trees.
 
-Codex usage is optional. It reports Codex account rate-limit information, not regular ChatGPT usage. The integration must use read-only `account/rateLimits/read`; do not consume a prompt to probe quota or copy credentials into this repository.
+AI usage is optional and shows exactly one selected provider. See [AI Usage](docs/AI-USAGE.md). The Codex provider reports Codex account rate-limit information, not regular ChatGPT usage. The integration must use read-only `account/rateLimits/read`; do not consume a prompt to probe quota or copy credentials into this repository.
 
 ## Development conventions
 
-Keep runtime source in `shell/`, native plugin source in `src/native-window-actions/`, CLI overrides in `src/cli-overrides/`, and optional Codex support in `src/codex-usage/`. Preserve upstream licensing and provenance. Keep human installation documentation and this agent runbook consistent with `./setup.sh --help` and the actual implementation.
+Keep runtime source in `shell/`, native plugin source in `src/native-window-actions/`, CLI overrides in `src/cli-overrides/`, generic usage in `src/ai-usage/`, and the Codex RPC client in `src/codex-usage/`. Preserve upstream licensing and provenance. Keep human installation documentation and this agent runbook consistent with `./setup.sh --help` and the actual implementation.
 
 Use repository tests and read-only checks appropriate to the change. Deploy tests must isolate HOME and system prefixes. A dry run must not install apt packages, add repositories, build/install into real prefixes, replace user files, or start services. After tests, report what ran and what it establishes. Do not invent test outcomes, JSON keys, service names, package versions, or paths when the implementation can be inspected.

@@ -114,7 +114,7 @@ def parse_args(argv=None):
     parser.add_argument('--scale', type=float, default=1.0)
     parser.add_argument('--vietnamese', action='store_true')
     parser.add_argument('--with-hyprmod', action='store_true')
-    parser.add_argument('--with-codex', action='store_true')
+    parser.add_argument('--with-ai-usage', '--with-codex', dest='with_codex', action='store_true', help='one selectable multi-provider AI usage widget (--with-codex is a compatibility alias)')
     parser.add_argument('--encoder', choices=('auto', 'libx264', 'h264_nvenc'), default='auto')
     parser.add_argument('--jobs', type=int, default=2)
     parser.add_argument('--reserve-gib', type=int, default=8)
@@ -457,6 +457,7 @@ def targets(paths):
         'portal': paths.config / 'xdg-desktop-portal/hyprland-portals.conf',
         'wallpaper': paths.data / 'wallpapers/wallpaper.png',
         'codex-backend': paths.data / 'codex-usage',
+        'ai-backend': paths.data / 'ai-usage',
         'fcitx-profile': paths.config / 'fcitx5/profile',
         'fcitx-unikey': paths.config / 'fcitx5/conf/unikey.conf',
     }
@@ -478,7 +479,7 @@ def resolved_encoder(requested):
 
 def profile_values(args, encoder):
     return {'scale': args.scale, 'vietnamese': args.vietnamese, 'hyprmod': args.with_hyprmod,
-            'codex_usage': args.with_codex, 'encoder_requested': args.encoder, 'encoder': encoder,
+            'codex_usage': args.with_codex, 'ai_usage': args.with_codex, 'encoder_requested': args.encoder, 'encoder': encoder,
             'jobs': args.jobs, 'reserve_gib': args.reserve_gib}
 
 
@@ -519,7 +520,7 @@ def render_templates(args, paths, staging):
     values = profile_values(args, encoder)
     (profile / 'profile.json').write_text(json.dumps(values, indent=2) + '\n')
     env = {'CAELESTIA_SCALE': str(args.scale), 'CAELESTIA_VIETNAMESE': str(int(args.vietnamese)),
-           'CAELESTIA_CODEX_USAGE': str(int(args.with_codex)), 'CAELESTIA_HYPRMOD': str(int(args.with_hyprmod))}
+           'CAELESTIA_CODEX_USAGE': str(int(args.with_codex)), 'CAELESTIA_AI_USAGE': str(int(args.with_codex)), 'CAELESTIA_HYPRMOD': str(int(args.with_hyprmod))}
     (profile / 'profile.env').write_text(''.join(f'export {key}={shlex.quote(value)}\n' for key, value in env.items()))
     add('portal', ROOT / 'configs/xdg-desktop-portal/hyprland-portals.conf')
     add('wallpaper', ROOT / 'assets/wallpaper.png')
@@ -541,6 +542,7 @@ def render_templates(args, paths, staging):
         text('unit-' + name, value)
     if args.with_codex:
         add('codex-backend', ROOT / 'src/codex-usage')
+        add('ai-backend', ROOT / 'src/ai-usage')
     if args.vietnamese:
         add('fcitx-profile', ROOT / 'configs/fcitx5/profile')
         add('fcitx-unikey', ROOT / 'configs/fcitx5/conf/unikey.conf')
@@ -601,15 +603,19 @@ def runtime_env(args, paths):
 
 def runtime_stage(args, paths):
     run([ROOT / 'installer/runtime.sh', 'all'], env=runtime_env(args, paths))
+    if args.with_codex:
+        run([ROOT / 'installer/runtime.sh', 'aiusage'], env=runtime_env(args, paths))
     if args.with_hyprmod:
         run([ROOT / 'installer/runtime.sh', 'hyprmod'], env=runtime_env(args, paths))
 
 
-def verify_deploy_requirements(paths):
+def verify_deploy_requirements(paths, with_ai_usage=False):
     version = pins()['hyprland']['version']
     required = [Path('/usr/local/bin/qs'), Path('/usr/bin/start-hyprland'), paths.data / 'bin/caelestia',
                 paths.data_root / f'hypr/plugins/native-minimize-{version}.so',
                 paths.data_root / f'hypr/plugins/hyprbars-{version}.so']
+    if with_ai_usage:
+        required.append(paths.data / ('codexbar-' + pins()['codexbar']['version']) / 'CodexBarCLI')
     missing = [str(item) for item in required if not item.is_file()]
     if missing:
         raise InstallError('Build/install the runtime and exact ABI plugins before deploy. Missing: ' + ', '.join(missing))
@@ -621,7 +627,7 @@ def verify_deploy_requirements(paths):
 
 
 def deploy_stage(args, paths):
-    verify_deploy_requirements(paths)
+    verify_deploy_requirements(paths, args.with_codex)
     with tempfile.TemporaryDirectory(prefix='caelestia-deploy-') as temp:
         entries = render_templates(args, paths, Path(temp))
         backup = deploy_transaction(entries, paths)
@@ -652,12 +658,14 @@ def doctor(args, paths):
         check(label, path.is_file(), str(path))
     qs = discover(['/usr/local/bin/qs', '--version'])
     check('quickshell-version', qs and '0.3.1' in qs, qs)
+    pending = []
     profile = paths.config / 'caelestia-pop-os/profile.json'
     selected = json.loads(profile.read_text()) if profile.is_file() else {}
-    if selected.get('codex_usage'):
-        check('codex-cli', shutil.which('codex') is not None, 'Optional: install/sign in to Codex separately; no credentials are installed here.')
+    if selected.get('ai_usage') or selected.get('codex_usage'):
+        check('ai-usage-backend', (paths.data / 'ai-usage/ai_usage.py').is_file(), 'Selected-provider backend')
+        check('usage-runtime', (paths.data / ('codexbar-' + pin_data['codexbar']['version']) / 'CodexBarCLI').is_file(), 'Pinned provider CLI and resource bundle')
+        pending.append('Connect the provider selected in AI Usage; credentials and live account access are not checked by doctor.')
     in_session = bool(os.environ.get('HYPRLAND_INSTANCE_SIGNATURE')) and os.environ.get('XDG_CURRENT_DESKTOP') == 'Hyprland'
-    pending = []
     if in_session:
         errors = discover(['hyprctl', 'configerrors'])
         check('hyprland-config', errors == '', errors)

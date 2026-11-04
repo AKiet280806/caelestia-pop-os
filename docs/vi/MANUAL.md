@@ -83,7 +83,7 @@ Font gồm Rubik, Material Symbols Rounded, CaskaydiaCove Nerd Font cùng licens
 
 Script kiểm tra bản gói Hyprland, commit, hash header và pkg-config trước khi build hyprbars cùng native window actions. Plugin native giữ trạng thái maximize sau fullscreen và chuyển tiếp minimize từ ứng dụng. File được thay nguyên tử trong `~/.local/share/hypr/plugins/`; không ghi đè trực tiếp lên inode thư viện compositor đang dùng. Sai ABI phải xử lý bằng bộ source/header tương thích, không bỏ kiểm tra.
 
-## 8. HyprMod và Codex tùy chọn
+## 8. HyprMod và AI Usage tùy chọn
 
 ```bash
 installer/runtime.sh hyprmod
@@ -91,7 +91,7 @@ installer/runtime.sh hyprmod
 
 HyprMod dùng Python 3.12 của bản phân phối trong môi trường riêng với GTK4/libadwaita. Nó chỉnh `hyprland-gui.lua`; module phím tắt được nạp sau để giữ chuột đứng yên khi đổi app. Bước cài không tự mở giao diện HyprMod.
 
-Thêm `--with-codex` ở bước deploy nếu muốn widget Codex và đã có CLI/tài khoản của bạn. Widget chỉ đọc hạn mức tài khoản Codex, không đo usage ChatGPT thường, không sao chép credential và không gửi prompt để thử quota. Bỏ tùy chọn thì widget ẩn và reader không chạy.
+Chạy `installer/runtime.sh aiusage`, rồi thêm `--with-ai-usage` khi deploy để có widget chung. Backend CodexBar được ghim phiên bản; chỉ một nhà cung cấp do bạn chọn trong popup được cập nhật. Codex giữ RPC chỉ đọc, provider khác dùng nguồn API/OAuth/web phù hợp. Xem [AI Usage](../AI-USAGE.md) để kết nối tài khoản và biết giới hạn trên Linux; không gửi prompt để thử quota.
 
 ## 9. Sao lưu và triển khai cấu hình
 
@@ -103,7 +103,7 @@ Nhắc lại các tùy chọn bạn đã chọn:
 ./setup.sh doctor
 ```
 
-Mỗi đích bị thay đều được backup và kiểm tra nội dung trước khi ghi. Script từ chối cấu hình chứa symlink; hãy giữ dotfiles hiện có và thực hiện migration có chủ đích. Cấu hình triển khai gồm toàn bộ shell, Lua, shell/CLI JSON, portal, helper, IME/Codex tùy chọn và user units. Ba file hệ thống là session entry, launcher do root sở hữu và `/etc/pam.d/quickshell` dùng các PAM include của Ubuntu.
+Mỗi đích bị thay đều được backup và kiểm tra nội dung trước khi ghi. Script từ chối cấu hình chứa symlink; hãy giữ dotfiles hiện có và thực hiện migration có chủ đích. Cấu hình triển khai gồm toàn bộ shell, Lua, shell/CLI JSON, portal, helper, IME/AI Usage tùy chọn và user units. Ba file hệ thống là session entry, launcher do root sở hữu và `/etc/pam.d/quickshell` dùng các PAM include của Ubuntu.
 
 Callback của phiên chỉ khởi chạy shell, clipboard watchers, authentication agent và integration đã chọn sau khi Hyprland chạy. Deploy không khởi chạy chúng bên trong COSMIC. Idle timeout và fingerprint ban đầu tắt; thử khóa/mở bằng mật khẩu khi đã có đường khôi phục trước khi bật tự khóa/sleep.
 
@@ -112,3 +112,5 @@ Callback của phiên chỉ khởi chạy shell, clipboard watchers, authenticat
 Tự lưu công việc và đăng xuất. Trong menu chọn phiên của COSMIC Greeter, chọn **Hyprland (Caelestia Pop!_OS)** rồi nhập mật khẩu. Làm theo [hướng dẫn đăng nhập/kiểm tra](INSTALL.md), [phím tắt](USAGE.md), [khôi phục](MAINTENANCE.md). Build thành công hoặc doctor đạt chưa chứng minh GPU đăng nhập thành công trên máy mới.
 
 `./setup.sh runtime --yes` chạy gộp các bước runtime theo thứ tự, có thể thêm tùy chọn cần thiết. `./setup.sh install --yes` chạy cả APT, runtime/plugin và deploy. Khi khôi phục lỗi, giữ cùng cache và tùy chọn đã chọn.
+
+Xem [AI Usage](../AI-USAGE.md) để chọn một nhà cung cấp và cấu hình nguồn usage.

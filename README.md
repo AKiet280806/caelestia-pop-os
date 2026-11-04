@@ -4,7 +4,7 @@
 
 A source-included Hyprland + Caelestia desktop for **Pop!_OS 24.04, amd64**, with floating windows, familiar window controls, a visual Alt+Tab switcher, and a practical path from the standard COSMIC desktop.
 
-**Version 0.1.0 is a pre-release.** The customized desktop has been exercised on a live machine; the complete installer has **not** been validated on a clean Pop!_OS installation. Static checks and isolated installer tests do not establish that a fresh-machine installation succeeds. Keep COSMIC as your recovery session and read the installation guide before running commands.
+**Version 0.2.0 is a pre-release.** The customized desktop has been exercised on a live machine; the complete installer has **not** been validated on a clean Pop!_OS installation. Static checks and isolated installer tests do not establish that a fresh-machine installation succeeds. Keep COSMIC as your recovery session and read the installation guide before running commands.
 
 ## What you get
 
@@ -14,7 +14,7 @@ A source-included Hyprland + Caelestia desktop for **Pop!_OS 24.04, amd64**, wit
 - Fullscreen video restores the previous maximized state; volume OSD stays visible above video and shows its percentage.
 - A visual, most-recently-used Alt+Tab chooser. Hold Alt, cycle, then release to commit; the pointer stays put.
 - Foot terminal, retained COSMIC Files, your existing default browser, clipboard history, screenshots, and screen recording with speaker audio.
-- Optional Vietnamese Telex input through Fcitx5 + Unikey, HyprMod settings, and a Codex usage widget.
+- Optional Vietnamese Telex input through Fcitx5 + Unikey, HyprMod settings, and one selectable AI usage widget.
 - The complete modified Caelestia shell in this repository, native plugin source, recorder overrides, and scripts to build the required runtime.
 
 This adds a session named **Hyprland (Caelestia Pop!_OS)** to COSMIC Greeter. COSMIC, `cosmic-greeter`, System76 power management, and distribution NVIDIA drivers stay installed. No automatic logout or reboot is performed.
@@ -44,6 +44,8 @@ Read the output, check free disk space and GPU support, then follow the [full in
 
 Run the installer as your normal user; it requests `sudo` for system changes. Installation downloads and compiles software and can take substantial time. Default scale is **1.0**, build parallelism is **2 jobs**, and the disk budget includes **8 GiB build/cache + 4 GiB runtime + 8 GiB reserve** when these share a filesystem. `--scale 1.5` is an explicit choice tested with a 14-inch 2560×1600 panel, not a universal display setting.
 
+See [AI Usage setup and the single-provider selector](docs/AI-USAGE.md). The older `--with-codex` flag remains an alias.
+
 ## Guides
 
 | Task | English | Tiếng Việt |
@@ -72,14 +74,15 @@ AI contributors should read [AGENTS.md](AGENTS.md) and [the agent documentation]
 | `./setup.sh rollback --backup latest --yes` | Restore backed-up configuration; packages are retained |
 | `./setup.sh clean-cache --yes` | Remove installer build directories; preserve sources, downloads and receipts |
 
-All commands accept `--dry-run`. `preflight`, `plan`, and `doctor` support `--json`. Installation and stages accept `--scale`, `--vietnamese`, `--with-hyprmod`, `--with-codex`, `--encoder auto|libx264|h264_nvenc`, `--jobs`, `--reserve-gib`, and `--cache-dir`. See [installation options](docs/en/INSTALL.md#choose-your-options).
+All commands accept `--dry-run`. `preflight`, `plan`, and `doctor` support `--json`. Installation and stages accept `--scale`, `--vietnamese`, `--with-hyprmod`, `--with-ai-usage`, `--encoder auto|libx264|h264_nvenc`, `--jobs`, `--reserve-gib`, and `--cache-dir`. See [installation options](docs/en/INSTALL.md#choose-your-options).
 
 ## Source and dependency design
 
 ```text
 shell/                      Complete modified Caelestia QML/C++ shell
 src/native-window-actions/  Native application window-action integration
-src/codex-usage/             Optional local Codex usage reader and tests
+src/ai-usage/                Selected-provider usage backend and tests
+src/codex-usage/             Read-only Codex RPC client and tests
 src/cli-overrides/           Pop!_OS recording/Cava adaptations
 configs/                    Hyprland, shell and portal configuration
 scripts/                    Session helpers

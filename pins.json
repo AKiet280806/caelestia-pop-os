@@ -123,5 +123,12 @@
       "pycairo": "1.29.2",
       "PyGObject": "3.58.1"
     }
+  },
+  "codexbar": {
+    "version": "0.83.0",
+    "url": "https://github.com/steipete/CodexBar/releases/download/v0.83.0/CodexBarCLI-v0.83.0-linux-x86_64.tar.gz",
+    "sha256": "e278eb0a1b6d620b5c84c157dfb16860a82477af6ec7330b6b6fb5c7f2729b5b",
+    "license": "MIT",
+    "source": "https://github.com/steipete/CodexBar/tree/v0.83.0"
   }
 }

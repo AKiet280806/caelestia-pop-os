@@ -78,7 +78,7 @@ With `--vietnamese`, the session starts Fcitx5 and selects Unikey. Use Fcitx5 Co
 
 HyprMod is optional and does not replace the installer or OS updater. Review monitor/scale changes before applying; keep the session profile and backup available. Your existing browser remains the default unless you choose another yourself.
 
-The optional Codex widget reports remaining percentage and reset information from available **Codex** rate-limit windows. Missing, stale or unavailable data is not zero remaining and is not evidence of your general ChatGPT chat quota. Sign in through your own official local Codex installation. The widget must never need you to paste an access token into shell configuration.
+AI Usage shows one provider you choose. Hover the sidebar widget, click the current provider name, search and select another. That choice persists after login; only its quota windows or balances are fetched. Connect the corresponding account locally, then refresh. Missing values stay unknown. See [provider setup and sources](../AI-USAGE.md).
 
 ## Lock, idle and power
 
@@ -102,3 +102,5 @@ If installed, launch `hyprmod` from the app launcher or terminal. Save monitor/s
 ## Sharp browser text on fractional scale
 
 Use the browser's native Wayland mode when possible. For Brave, inspect `brave://version` and `brave://gpu`. Test a separate launch with `--ozone-platform=wayland`; an already running instance may ignore new startup flags. For the Brave Flatpak, flags can be stored in `~/.var/app/com.brave.Browser/config/brave-flags.conf`. Preserve existing flags and append only `--ozone-platform=wayland` if needed. Save forms and work before closing/reopening the browser yourself. This installer retains your chosen browser and does not overwrite browser profiles.
+
+For the single-provider AI Usage selector and account setup, see [AI Usage](../AI-USAGE.md).

@@ -4,7 +4,7 @@
 
 Hướng dẫn bắt đầu khi bạn đang dùng **Pop!_OS 24.04 amd64 với desktop COSMIC mặc định**. Dự án thêm một phiên Hyprland + Caelestia để chọn lúc đăng nhập, đồng thời giữ COSMIC làm đường quay về.
 
-**Bản 0.1.0 còn là pre-release.** Desktop tùy biến đã được chạy và kiểm tra trên một máy thật; toàn bộ quy trình cài trên máy Pop!_OS mới sạch **chưa được kiểm thử hoàn chỉnh**. Kiểm tra tĩnh hoặc chạy thử trình cài với thư mục home tạm không thay thế việc kiểm thử đó. Hãy sao lưu tài liệu quan trọng và giữ COSMIC.
+**Bản 0.2.0 còn là pre-release.** Desktop tùy biến đã được chạy và kiểm tra trên một máy thật; toàn bộ quy trình cài trên máy Pop!_OS mới sạch **chưa được kiểm thử hoàn chỉnh**. Kiểm tra tĩnh hoặc chạy thử trình cài với thư mục home tạm không thay thế việc kiểm thử đó. Hãy sao lưu tài liệu quan trọng và giữ COSMIC.
 
 ## 1. Mở Terminal và kiểm tra máy
 
@@ -80,7 +80,7 @@ Các thao tác APT của dự án phải từ chối gỡ gói. Nếu APT đòi 
 | `--scale 1.5` | Mức đã thử với màn 14 inch 2560×1600 |
 | `--vietnamese` | Cài/cấu hình Fcitx5 + Unikey để gõ tiếng Việt Telex |
 | `--with-hyprmod` | Thêm giao diện thiết lập HyprMod 0.5 tùy chọn |
-| `--with-codex` | Thêm widget hạn mức tài khoản Codex tùy chọn |
+| `--with-ai-usage` | Thêm một widget AI Usage, nhà cung cấp do bạn chọn |
 | `--encoder libx264` | Quay H.264 bằng CPU, lựa chọn mặc định dễ tương thích |
 | `--encoder auto` | Chọn dựa trên encoder khả dụng; cần đọc kết quả |
 | `--encoder h264_nvenc` | Chọn NVIDIA rõ ràng sau khi kiểm tra GPU và FFmpeg |
@@ -164,7 +164,7 @@ Nếu Terminal đang ở home, `cd` về thư mục repo trước khi gọi `set
 
 Nếu bật tiếng Việt, mở **Fcitx5 Configuration**, thêm/chọn **Unikey**, chọn Telex phù hợp rồi thử trong ô nhập văn bản. Một số app Flatpak cần hỗ trợ bộ gõ riêng; không sửa một app bằng cách xuất đường dẫn Qt riêng ra toàn COSMIC.
 
-Widget Codex tùy chọn đọc hạn mức Codex khả dụng từ phiên Codex cục bộ do chính bạn đăng nhập. Đây không phải số tin nhắn ChatGPT chat thông thường còn lại. Không chép thông tin đăng nhập vào repo. Xem liên kết cài/đăng nhập chính thức ở [phần công cụ tùy chọn](MANUAL.md#công-cụ-tùy-chọn).
+Widget AI Usage hiển thị một nhà cung cấp bạn chọn. Rê chuột để mở, bấm tên và tìm nhà cung cấp trong danh sách. Đăng nhập/cấu hình nguồn tương ứng trên máy theo [hướng dẫn AI Usage](../AI-USAGE.md). Quota Codex và billing OpenAI API là hai nguồn riêng, không phải hạn mức tin nhắn ChatGPT thường.
 
 ## 9. Thử đường quay về COSMIC
 
@@ -175,3 +175,5 @@ tail -n 100 "$HOME/.local/state/caelestia-pop-os/session.log"
 ```
 
 Không vội xóa cấu hình hoặc purge gói để chữa màn hình đen. [Khôi phục và bảo trì](MAINTENANCE.md) hướng dẫn rollback cấu hình và gỡ riêng tích hợp của dự án.
+
+Xem [AI Usage](../AI-USAGE.md) để chọn một nhà cung cấp và cấu hình nguồn usage.

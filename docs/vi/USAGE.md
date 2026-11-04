@@ -78,7 +78,7 @@ Khi cài `--vietnamese`, phiên khởi động Fcitx5 và chọn Unikey. Mở Fc
 
 HyprMod là giao diện thiết lập tùy chọn, không thay trình cài hoặc cập nhật hệ điều hành. Đọc lại thay đổi màn hình/scale trước khi áp dụng; giữ profile và backup. Trình duyệt hiện tại vẫn dùng làm mặc định trừ khi bạn tự chọn app khác.
 
-Widget Codex hiển thị phần trăm còn lại và thời điểm reset của các cửa sổ hạn mức **Codex** khả dụng. Trạng thái thiếu, cũ hoặc chưa đọc được không có nghĩa còn 0%; cũng không phải hạn mức ChatGPT chat thường. Tự đăng nhập Codex cục bộ chính thức. Không cần dán token vào cấu hình shell.
+AI Usage chỉ hiện một nhà cung cấp bạn chọn. Rê chuột vào widget, bấm tên nhà cung cấp, tìm và chọn mục khác. Lựa chọn được nhớ sau khi đăng nhập lại; backend chỉ cập nhật quota/số dư của mục đó. Kết nối tài khoản cục bộ rồi Refresh; số liệu thiếu sẽ hiện Unknown. Xem [cách kết nối provider](../AI-USAGE.md).
 
 ## Khóa màn hình, idle và nguồn điện
 
@@ -102,3 +102,5 @@ Nếu đã cài, mở `hyprmod` từ launcher hoặc terminal. Chủ động xem
 ## Chữ trình duyệt sắc nét khi dùng scale lẻ
 
 Ưu tiên Wayland native nếu trình duyệt hỗ trợ. Với Brave, xem `brave://version`, `brave://gpu`, thử mở riêng với `--ozone-platform=wayland`. Phiên Brave đang chạy có thể bỏ qua cờ mới. Bản Flatpak có thể lưu cờ tại `~/.var/app/com.brave.Browser/config/brave-flags.conf`; giữ cờ cũ và chỉ thêm `--ozone-platform=wayland` nếu cần. Tự lưu biểu mẫu/công việc trước khi đóng và mở lại trình duyệt. Installer giữ trình duyệt mặc định, không ghi đè profile.
+
+Xem [AI Usage](../AI-USAGE.md) để chọn một nhà cung cấp và cấu hình nguồn usage.

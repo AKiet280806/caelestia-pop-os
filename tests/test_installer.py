@@ -25,6 +25,11 @@ class SafetyTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             mod.parse_args(['deploy', '--scale', 'nan'])
 
+    def test_usage_option_compatibility_alias(self):
+        new = mod.parse_args(['install', '--with-ai-usage'])
+        old = mod.parse_args(['install', '--with-codex'])
+        self.assertEqual(vars(new), vars(old))
+
     def test_disk_shared_and_separate(self):
         self.assertEqual(mod.disk_requirements(1, 1, 8), {1: 20 * mod.GIB})
         self.assertEqual(mod.disk_requirements(1, 2, 8), {1: 12 * mod.GIB, 2: 8 * mod.GIB})
@@ -60,6 +65,9 @@ class SafetyTests(unittest.TestCase):
             self.assertIn('scale = 1.5', (paths.config / 'hypr/hyprland.lua').read_text())
             self.assertIn('CAELESTIA_CODEX_USAGE=1', (paths.config / 'caelestia-pop-os/profile.env').read_text())
             self.assertIn('Pop!_OS', paths.system('session-desktop').read_text())
+            self.assertTrue((paths.data / 'ai-usage/ai_usage.py').is_file())
+            unit = (paths.config / 'systemd/user/caelestia-codex-usage.service').read_text()
+            self.assertIn('ai-usage/ai_usage.py', unit)
             mod.rollback_transaction(backup, mod.targets(paths), paths)
             self.assertFalse(paths.config.joinpath('hypr').exists())
             self.assertFalse(paths.system('pam').exists())

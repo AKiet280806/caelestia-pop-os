@@ -13,10 +13,11 @@ jobs:
         run: |
           python3 -m unittest discover -s tests -v
           python3 -m unittest discover -s src/codex-usage -v
+          python3 -m unittest discover -s src/ai-usage -v
           python3 scripts/runtime-metadata.py validate
           python3 tests/check_sources.py
       - name: Shell checks
         run: |
           shellcheck setup.sh installer/runtime*.sh scripts/build-plugins.sh scripts/start-* scripts/open-*
           ./setup.sh --help
-          ./setup.sh install --dry-run --with-codex --with-hyprmod --vietnamese --scale 1.5
+          ./setup.sh install --dry-run --with-ai-usage --with-hyprmod --vietnamese --scale 1.5

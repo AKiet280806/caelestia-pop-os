@@ -64,7 +64,7 @@ A conservative example:
 ./setup.sh install --dry-run --scale 1.0 --encoder auto --jobs 2 --reserve-gib 8
 ```
 
-Add `--vietnamese`, `--with-hyprmod`, and `--with-codex` only when requested or within the user's accepted setup scope. `--encoder` accepts `auto`, `libx264`, or `h264_nvenc`. Hardware encoding requires appropriate hardware/driver support; do not label `auto` as verified hardware encoding until the produced recording is inspected.
+Add `--vietnamese`, `--with-hyprmod`, and `--with-ai-usage` only when requested or within the user's accepted setup scope. `--encoder` accepts `auto`, `libx264`, or `h264_nvenc`. Hardware encoding requires appropriate hardware/driver support; do not label `auto` as verified hardware encoding until the produced recording is inspected.
 
 Check the plan against the authorized target and exact pins. Qt 6.11.2 and private Wayland 1.26 use an `/opt` prefix. Quickshell and plugins install under `/usr/local` with the intended RPATH. Confirm managed configuration destinations and the backup/manifest mechanism before deployment. A dry run is planning evidence only; it cannot establish build success or working GPU login.
 
@@ -98,3 +98,5 @@ Before advancing past deployment, verify the backup identifier, manifest, and in
 Tell the human that installation is ready for a session test and include any unresolved findings. Let them save their work and log out themselves. In **cosmic-greeter**, select **Hyprland (Caelestia Pop!_OS)** using the **application-menu/menu icon** session selector. Do not describe a GDM gear icon. They enter their own password and inspect the display.
 
 Do not restart the display manager, log out, reboot, or type a password for them. Keep COSMIC available in the same selector as the recovery session. While login is pending, continue independent documentation, static validation, or evidence review. After the human reports successful login, continue with [VERIFY.md](VERIFY.md); the session is not verified merely because the greeter listed it.
+
+See [AI Usage](../AI-USAGE.md) for provider selection and setup.

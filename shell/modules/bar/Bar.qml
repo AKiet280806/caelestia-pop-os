@@ -160,9 +160,9 @@ ColumnLayout {
                 delegate: EntryWrapper {
                     Column {
                         spacing: root.spacing
-                        CodexUsageButton {
-                            objectName: "taskbarCodexUsage"
-                            visible: Quickshell.env("CAELESTIA_CODEX_USAGE") === "1"
+                        AIUsageButton {
+                            objectName: "taskbarAIUsage"
+                            visible: Quickshell.env("CAELESTIA_AI_USAGE") === "1" || Quickshell.env("CAELESTIA_CODEX_USAGE") === "1"
                             bar: root
                             popouts: root.popouts
                         }

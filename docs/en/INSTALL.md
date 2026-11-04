@@ -2,7 +2,7 @@
 
 [Tiếng Việt](../vi/INSTALL.md) · [README](../../README.md) · [Manual component guide](MANUAL.md)
 
-This guide starts on **Pop!_OS 24.04 amd64**, already running the normal COSMIC desktop. It adds Hyprland and Caelestia as another login session. Version 0.1.0 is a pre-release: a complete installation on a clean machine has not yet been tested. Keep a copy of important files and keep COSMIC available.
+This guide starts on **Pop!_OS 24.04 amd64**, already running the normal COSMIC desktop. It adds Hyprland and Caelestia as another login session. Version 0.2.0 is a pre-release: a complete installation on a clean machine has not yet been tested. Keep a copy of important files and keep COSMIC available.
 
 ## 1. Open a terminal and identify your machine
 
@@ -76,7 +76,7 @@ Resolve reported OS, disk, APT, or version problems first. The Hyprland package 
 | `--scale 1.5` | A tested choice for a 14-inch 2560×1600 internal panel |
 | `--vietnamese` | Install/configure Fcitx5 + Unikey for Vietnamese Telex |
 | `--with-hyprmod` | Include optional HyprMod 0.5 settings interface |
-| `--with-codex` | Include the optional Codex account-usage integration |
+| `--with-ai-usage` | One AI Usage widget with a persistent provider selector |
 | `--encoder libx264` | Portable CPU H.264 recording; default portable choice |
 | `--encoder auto` | Let installer selection inspect available encoders; check the result |
 | `--encoder h264_nvenc` | Explicit NVIDIA encoding choice after checking hardware/FFmpeg |
@@ -158,7 +158,7 @@ Run `setup.sh` from the downloaded repository if the terminal starts in your hom
 
 With Vietnamese enabled, inspect Fcitx5 Configuration, add/select **Unikey**, choose Telex as appropriate, and test in a normal text field. Individual Flatpak applications may need their own input-method support; do not fix one app by exporting global Qt paths into COSMIC.
 
-The optional Codex widget reads available Codex account limits through your own local signed-in Codex installation. It is not the regular ChatGPT chat message quota. No credentials should be copied into this repository. Follow official Codex installation/sign-in guidance linked from [the component guide](MANUAL.md#optional-tools).
+The optional AI Usage widget shows one selected provider. Hover it, click the provider name and choose from the searchable list. Connect the provider locally using its supported CLI or CodexBar configuration; see [AI Usage](../AI-USAGE.md). Codex subscription quota and OpenAI API billing are separate sources; neither represents ordinary ChatGPT chat-message quota.
 
 ## 8. Keep a working way back
 
@@ -169,3 +169,5 @@ tail -n 100 "$HOME/.local/state/caelestia-pop-os/session.log"
 ```
 
 Do not delete configurations or purge packages to diagnose a blank screen. [Maintenance and recovery](MAINTENANCE.md) explains configuration rollback and removing only this project's session integration.
+
+For the single-provider AI Usage selector and account setup, see [AI Usage](../AI-USAGE.md).

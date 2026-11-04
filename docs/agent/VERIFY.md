@@ -51,9 +51,9 @@ Coordinate these disruptive or physical checks with the human; do not trigger th
 
 Continue independent read-only checks while waiting. If human testing is deferred, mark these cases **untested** and identify the next action. Keep COSMIC available as a recovery session throughout.
 
-## Optional Codex usage
+## Optional AI usage
 
-Only test if `--with-codex` was selected. Use the existing user-owned Codex installation/session without copying credentials or authenticating on the user's behalf. The integration uses read-only `account/rateLimits/read`; do not send a prompt to measure quota. Verify the display handles available limits, reset times, and unavailable/unauthenticated states without a crash. Report that it concerns Codex account rate limits, not regular ChatGPT usage. Never put account identifiers, authentication files, or raw credential-bearing RPC traffic into reports.
+Only test if `--with-ai-usage` was selected. Hover the logo, open the provider selector, search and select a provider, and verify exactly one widget and persisted selection. Refresh and filter the list while the pointer is inside; the popup must not shrink away. Missing authentication must show unavailable, without data from the previous provider. See [AI Usage](../AI-USAGE.md). For Codex: Use the existing user-owned Codex installation/session without copying credentials or authenticating on the user's behalf. The integration uses read-only `account/rateLimits/read`; do not send a prompt to measure quota. Verify the display handles available limits, reset times, and unavailable/unauthenticated states without a crash. Report that it concerns Codex account rate limits, not regular ChatGPT usage. Never put account identifiers, authentication files, or raw credential-bearing RPC traffic into reports.
 
 ## Completion report
 

@@ -103,8 +103,8 @@ Item {
         }
 
         Popout {
-            name: "codexusage"
-            sourceComponent: CodexUsageDetails {}
+            name: "aiusage"
+            sourceComponent: AIUsageDetails { popouts: root.popouts }
         }
 
         Popout {

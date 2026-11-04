@@ -8,8 +8,8 @@ source "$(dirname -- "${BASH_SOURCE[0]}")/runtime-common.sh"
 
 usage() {
     printf '%s\n' 'Usage: installer/runtime.sh STAGE' \
-        'Stages: toolchain wayland cava quickshell m3shapes shell cli fonts tools plugins hyprmod all' \
-        'all excludes optional hyprmod. First install apt dependencies with the Python installer.' \
+        'Stages: toolchain wayland cava quickshell m3shapes shell cli fonts tools plugins hyprmod aiusage all' \
+        'all excludes optional hyprmod/aiusage. First install apt dependencies with the Python installer.' \
         'CAELESTIA_CACHE_DIR selects a private cache; CAELESTIA_JOBS defaults to 2.'
 }
 
@@ -260,11 +260,37 @@ stage_hyprmod() {
     [[ -d $src/.git ]] || die 'Hyprmod source checkout missing.'
 }
 
+stage_aiusage() {
+    log 'Pinned multi-provider usage CLI (no Swift toolchain or extra desktop)'
+    local version archive prefix staging
+    version=$(pin codexbar.version)
+    archive="$CACHE/downloads/CodexBarCLI-v$version-linux-x86_64.tar.gz"
+    prefix="$DATA/codexbar-$version"
+    if ! receipt_valid aiusage; then
+        [[ ! -e $prefix ]] || die "Existing unverified usage runtime at $prefix; preserve it before retrying."
+        download "$(pin codexbar.url)" "$(pin codexbar.sha256)" "$archive"
+        staging=$(mktemp -d "$DATA/.codexbar-$version.XXXXXXXX")
+        # Python's data filter rejects archive paths and links outside staging.
+        python3 - "$archive" "$staging" <<'PY'
+import sys, tarfile
+with tarfile.open(sys.argv[1]) as archive:
+    archive.extractall(sys.argv[2], filter='data')
+PY
+        [[ -x $staging/CodexBarCLI && -d $staging/CodexBar_CodexBarCore.bundle ]] \
+            || die 'Incomplete usage CLI archive; executable and resource bundle are required.'
+        "$staging/CodexBarCLI" --version
+        mv -T -- "$staging" "$prefix"
+        receipt_save aiusage "$prefix"
+    fi
+    expose_command codexbar "$prefix/CodexBarCLI"
+    "$prefix/CodexBarCLI" --version
+}
+
 main() {
     [[ $# == 1 ]] || { usage >&2; exit 2; }
     case "$1" in
         -h|--help|help) usage; return ;;
-        toolchain|wayland|cava|quickshell|m3shapes|shell|cli|fonts|tools|plugins|hyprmod|all) ;;
+        toolchain|wayland|cava|quickshell|m3shapes|shell|cli|fonts|tools|plugins|hyprmod|aiusage|all) ;;
         *) usage >&2; die "Unknown stage: $1" ;;
     esac
     init_runtime

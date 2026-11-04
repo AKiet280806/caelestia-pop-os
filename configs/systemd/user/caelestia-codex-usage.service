@@ -1,5 +1,5 @@
 [Unit]
-Description=Read-only Codex account usage for the Caelestia sidebar
+Description=AI usage for the provider selected in Caelestia
 PartOf=caelestia-shell.service
 After=caelestia-shell.service
 ConditionEnvironment=HYPRLAND_INSTANCE_SIGNATURE
@@ -8,9 +8,10 @@ ConditionEnvironment=XDG_CURRENT_DESKTOP=Hyprland
 [Service]
 Type=simple
 Environment=PATH=@CODEX_PATH@:%h/.local/bin:/usr/local/bin:/usr/bin:/bin
-ExecStart=/usr/bin/python3 "@DATA@/caelestia-pop-os/codex-usage/codex_usage.py"
+ExecStart=/usr/bin/python3 "@DATA@/caelestia-pop-os/ai-usage/ai_usage.py"
 Restart=on-failure
 RestartSec=30
 TimeoutStopSec=10
 NoNewPrivileges=yes
+UMask=0077
 StandardOutput=null

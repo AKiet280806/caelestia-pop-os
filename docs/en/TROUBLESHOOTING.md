@@ -115,6 +115,10 @@ Check free space in `~/Videos/Recordings`. The audio source is the output sink's
 
 Automatic timeouts and fingerprint unlock are off initially. Use password unlock and test Win+L while you have a working TTY/COSMIC recovery path. Inspect PAM/lock logs before enabling idle lock or suspend. Do not enable fingerprint simply because the laptop has a sensor. Sleep/wake is not validated for every GPU configuration.
 
-## Optional Codex widget has no data
+## Optional AI Usage widget has no data
 
-Check that the official `codex` command exists in the session's PATH and is signed in as your own account. Inspect widget/backend status without copying credentials. Missing RPC quota data, an expired login, an unsupported account or stale data should display as unavailable/stale. It does not establish the remaining quota of ordinary ChatGPT messages. Report sanitized status and version details, never `auth.json`, access tokens or your entire Codex state directory.
+First verify the selected provider in the popup and its authentication/source requirements in [AI Usage](../AI-USAGE.md). For Codex, check that the official `codex` command exists in the session's PATH and is signed in as your own account. Inspect widget/backend status without copying credentials. Missing RPC quota data, an expired login, an unsupported account or stale data should display as unavailable/stale. It does not establish the remaining quota of ordinary ChatGPT messages. Report sanitized status and version details, never `auth.json`, access tokens or your entire Codex state directory.
+
+For the single-provider AI Usage selector and account setup, see [AI Usage](../AI-USAGE.md).
+
+The compatibility service name is `caelestia-codex-usage.service`; generic cache errors and supported-source limits are explained in [AI Usage](../AI-USAGE.md).

@@ -108,7 +108,7 @@ CustomMouseArea {
             if (!utilitiesShortcutActive)
                 screenState.utilities = false;
 
-            if (!popouts.currentName.startsWith("traymenu") || ((popouts.current as StackView)?.depth ?? 0) <= 1) {
+            if (popouts.currentName !== "aiusage" && (!popouts.currentName.startsWith("traymenu") || ((popouts.current as StackView)?.depth ?? 0) <= 1)) {
                 popouts.hasCurrent = false;
                 bar.closeTray();
             }
@@ -279,8 +279,9 @@ CustomMouseArea {
 
         // Show popouts on hover
         if (x < bar.implicitWidth) {
-            bar.checkPopout(y);
-        } else if ((!popouts.currentName.startsWith("traymenu") || ((popouts.current as StackView)?.depth ?? 0) <= 1) && !inLeftPanel(panels.popoutsWrapper, x, y)) {
+            if (!(popouts.currentName === "aiusage" && (popouts.current?.interactionActive ?? false)))
+                bar.checkPopout(y);
+        } else if (popouts.currentName !== "aiusage" && (!popouts.currentName.startsWith("traymenu") || ((popouts.current as StackView)?.depth ?? 0) <= 1) && !inLeftPanel(panels.popoutsWrapper, x, y)) {
             popouts.hasCurrent = false;
             bar.closeTray();
         }

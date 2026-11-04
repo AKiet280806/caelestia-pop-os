@@ -83,7 +83,7 @@ Fonts include Rubik, Material Symbols Rounded and CaskaydiaCove Nerd Font, downl
 
 The build checks the installed Hyprland package version, source hash, header digest and pkg-config version before compiling hyprbars and native window actions. The latter restores fullscreen/maximize state and handles native minimize requests. Products install atomically under `~/.local/share/hypr/plugins/`; never truncate a library already mapped into a compositor. A mismatched ABI must be rebuilt from matching pins, not bypassed.
 
-## 8. Optional HyprMod and Codex
+## 8. Optional HyprMod and AI Usage
 
 ```bash
 installer/runtime.sh hyprmod
@@ -91,7 +91,7 @@ installer/runtime.sh hyprmod
 
 HyprMod uses an isolated distro Python 3.12 environment with GTK4/libadwaita. It edits `hyprland-gui.lua`; the main Lua loads window shortcuts afterward so pointer warps remain disabled. The installation does not launch its settings UI.
 
-The Codex widget is deployed with `--with-codex`; it requires your own working Codex CLI/account. It reads account rate limits, not ordinary ChatGPT usage. It neither installs credentials nor sends a prompt to measure quota. Omit the flag to hide the widget and avoid running its reader.
+Build the optional usage runtime with `installer/runtime.sh aiusage`, then deploy with `--with-ai-usage`. It installs pinned CodexBar CLI and a generic backend that polls exactly one provider selected in the popup. Codex retains its read-only RPC path; other providers use supported API/OAuth/web sources. Follow [AI Usage setup](../AI-USAGE.md) for authentication and Linux source limits. No prompts are sent to probe quota.
 
 ## 9. Back up and deploy configuration
 
@@ -103,7 +103,7 @@ Repeat your selected options explicitly:
 ./setup.sh doctor
 ```
 
-Deployment backs up every managed destination and verifies its contents before replacement. Symlinked config trees are refused; preserve your dotfiles and choose an intentional migration instead of replacing links. User files include the complete modified shell, Lua modules, shell/CLI config, portal preference, session helpers, selected IME config, optional Codex reader and user units. System files are limited to the session desktop entry, its root-owned launcher, and `/etc/pam.d/quickshell`, which uses Ubuntu's common PAM includes.
+Deployment backs up every managed destination and verifies its contents before replacement. Symlinked config trees are refused; preserve your dotfiles and choose an intentional migration instead of replacing links. User files include the complete modified shell, Lua modules, shell/CLI config, portal preference, session helpers, selected IME config, optional selected-provider usage reader and user units. System files are limited to the session desktop entry, its root-owned launcher, and `/etc/pam.d/quickshell`, which uses Ubuntu's common PAM includes.
 
 The session callback starts the shell, clipboard watchers, authentication agent and selected integrations only after Hyprland starts. Deployment does not start them in COSMIC. Idle timeouts and fingerprint unlock are initially disabled. Test password locking with a recovery path before enabling automatic lock/sleep.
 
@@ -112,3 +112,5 @@ The session callback starts the shell, clipboard watchers, authentication agent 
 Save work and log out yourself. In COSMIC Greeter's application-menu session selector, choose **Hyprland (Caelestia Pop!_OS)**, then enter your password. Follow [first-session checks](INSTALL.md#7-first-login-checks), [shortcuts](USAGE.md), and [recovery](MAINTENANCE.md). A successful build or doctor result does not prove a successful physical GPU login.
 
 To perform the build sequence above in one resumable runtime invocation, use `./setup.sh runtime --yes` with your optional flags. To perform packages, runtime/plugins and deployment together, use `./setup.sh install --yes`. Keep the same cache and options when recovering.
+
+For the single-provider AI Usage selector and account setup, see [AI Usage](../AI-USAGE.md).

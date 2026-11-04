@@ -23,6 +23,20 @@ StyledWindow {
     readonly property ScreenState screenState: ShellState.forScreen(screen)
 
     readonly property HyprlandMonitor monitor: Hypr.monitorFor(screen)
+    readonly property bool usageSelectorActive: panels.popouts.hasCurrent && panels.popouts.currentName === "aiusage" && (panels.popouts.current?.interactionActive ?? false)
+    property bool usageFocusReady: false
+    onUsageSelectorActiveChanged: {
+        usageFocusReady = false;
+        if (usageSelectorActive) usageFocusTimer.restart();
+        else usageFocusTimer.stop();
+    }
+    Timer {
+        id: usageFocusTimer
+        interval: 150
+        // Changing layer-shell keyboard mode recreates its surface. Register
+        // the focus grab after that commit, rather than grabbing the old one.
+        onTriggered: root.usageFocusReady = root.usageSelectorActive
+    }
     readonly property bool hasSpecialWorkspace: (monitor?.lastIpcObject.specialWorkspace?.name.length ?? 0) > 0
     readonly property bool hasFullscreenOnNormalWs: monitor?.activeWorkspace?.toplevels.values.some(t => t.lastIpcObject.fullscreen > 1) ?? false
     readonly property bool hasFullscreen: {
@@ -69,7 +83,7 @@ StyledWindow {
     name: "drawers"
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: (fsTransitionProg > 0 && contentItem.Config.general.showOverFullscreen) || (hasSpecialWorkspace && hasFullscreenOnNormalWs) ? WlrLayer.Overlay : WlrLayer.Top
-    WlrLayershell.keyboardFocus: screenState.launcher || screenState.session ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
+    WlrLayershell.keyboardFocus: usageSelectorActive ? WlrKeyboardFocus.Exclusive : screenState.launcher || screenState.session ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
     mask: hasFullscreen ? emptyRegion : regions
 
@@ -120,12 +134,18 @@ StyledWindow {
                 return true;
             if (!conf.dashboard.showOnHover && s.dashboard && conf.dashboard.enabled)
                 return true;
+            if (root.usageFocusReady)
+                return true;
             if (panels.popouts.currentName.startsWith("traymenu") && (panels.popouts.current as StackView)?.depth > 1)
                 return true;
             return false;
         }
         windows: [root]
         onCleared: {
+            // Retiring the selector's keyboard surface can clear its old grab.
+            // Selection has already finished; let ordinary hover close the popup.
+            if (panels.popouts.hasCurrent && panels.popouts.currentName === "aiusage" && !root.usageSelectorActive)
+                return;
             root.screenState.launcher = false;
             root.screenState.session = false;
             root.screenState.sidebar = false;

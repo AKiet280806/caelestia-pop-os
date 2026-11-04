@@ -1,0 +1,72 @@
+{
+  "repository": "https://github.com/lobehub/lobe-icons",
+  "revision": "ea434b96e75813517b377825e01c0df61dee8836",
+  "modification": "Replace currentColor with #e6e1ef for standalone Qt SVG rendering. Color variants retain their original fills.",
+  "icons": {
+    "codex": {
+      "source": "packages/static-svg/icons/codex-color.svg",
+      "upstream_sha256": "4a2f43ce46b5b6e3722c95088f88d26ef91e6a8c2e598e70642a1c54367386e4",
+      "bundled_sha256": "4a2f43ce46b5b6e3722c95088f88d26ef91e6a8c2e598e70642a1c54367386e4"
+    },
+    "openai": {
+      "source": "packages/static-svg/icons/openai.svg",
+      "upstream_sha256": "a595df6b423920c67a7f8f73c063e4bfb72d415948097b6cac063a2366bb5186",
+      "bundled_sha256": "2a4cf32f7472a9363ab535a69586e0c40f4f4cdef639eb57263ab6d6ed97b9c6"
+    },
+    "claude": {
+      "source": "packages/static-svg/icons/claude-color.svg",
+      "upstream_sha256": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364",
+      "bundled_sha256": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364"
+    },
+    "antigravity": {
+      "source": "packages/static-svg/icons/antigravity-color.svg",
+      "upstream_sha256": "652128cf55a28bb958563ee372d0bd00208d9e6fd446f523f77aafd811eef8ca",
+      "bundled_sha256": "652128cf55a28bb958563ee372d0bd00208d9e6fd446f523f77aafd811eef8ca"
+    },
+    "copilot": {
+      "source": "packages/static-svg/icons/githubcopilot.svg",
+      "upstream_sha256": "bbc7fddc13448236e5edea8c399d2072dc40aa5da5bca07f7a2f412405c500a3",
+      "bundled_sha256": "3526f1a86b9a5727a5c05c344ba3744a9f91b8c5046370a521020ca8e57fb496"
+    },
+    "opencode": {
+      "source": "packages/static-svg/icons/opencode.svg",
+      "upstream_sha256": "7cfa6e9d6726f7c9fa26c7d9aef0dfec52d20a137380454340f30f12ccbfd302",
+      "bundled_sha256": "db99a41d1c4e5d515ee9d5886092f9e296c2a4efea04a6a846ad2a01b0cc368d"
+    },
+    "zai": {
+      "source": "packages/static-svg/icons/zai.svg",
+      "upstream_sha256": "e748cb5108ce37b116d7a5ba97d37e0ae97eadf6849b0de11afb248e244a01e1",
+      "bundled_sha256": "b8fa94ac2871e857af8ed0cd5a90eeebbb5739711e86826b27f7b303884c7b01"
+    },
+    "kimi": {
+      "source": "packages/static-svg/icons/kimi-color.svg",
+      "upstream_sha256": "0bdb95375d7c6e90a1850e91cd36770da2bc98fa33ec2d783f4a8fed027da85f",
+      "bundled_sha256": "6c622aeecc014f01a44a2bef7c9a19a33905a9e3d8c6330686ef6e0976dcc8d5"
+    },
+    "kilo": {
+      "source": "packages/static-svg/icons/kilocode.svg",
+      "upstream_sha256": "a2aef0e0bb992ebe768bfb8c3a3ab6ff2c2638448b09dd88db27877de1c07a22",
+      "bundled_sha256": "ea6087513e15d73bb04ccefde3a89a5eddde3b9538fdb12ed89473544f13ed48"
+    },
+    "deepseek": {
+      "source": "packages/static-svg/icons/deepseek-color.svg",
+      "upstream_sha256": "deba5f98a5c1796e20fcac3149bcd7eb8a32f0bdd04d048819400b1f28bd1439",
+      "bundled_sha256": "deba5f98a5c1796e20fcac3149bcd7eb8a32f0bdd04d048819400b1f28bd1439"
+    },
+    "cursor": {
+      "source": "packages/static-svg/icons/cursor.svg",
+      "upstream_sha256": "0cb51bddf264ae108926fd554c063ef40fc1aac3c5c921ddb39ad184e4e5d0ef",
+      "bundled_sha256": "77c343e8152e355cb60da42884251679786cfa7b6656d8188dc9a2fd149a76de"
+    },
+    "gemini": {
+      "source": "packages/static-svg/icons/gemini-color.svg",
+      "upstream_sha256": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602",
+      "bundled_sha256": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602"
+    },
+    "grok": {
+      "source": "packages/static-svg/icons/grok.svg",
+      "upstream_sha256": "9175fc90c22655160231976c849f25a03b888d7cc0e04c5f1b987b659bb07c95",
+      "bundled_sha256": "f50042bcae4ebc386e28f8fe2cdc922d45f34c2f0f6469c818ada4d684edc07d"
+    }
+  }
+}
