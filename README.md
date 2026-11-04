@@ -13,30 +13,41 @@ A Hyprland desktop for **Pop!_OS 24.04**, with the Caelestia shell, familiar win
 
 ## Gallery
 
-| Application launcher · Win+D | Visual window switcher · Alt+Tab |
-| --- | --- |
-| [<img src="assets/screenshots/launcher.png" alt="Application search in the translucent launcher" width="400">](assets/screenshots/launcher.png) | [<img src="assets/screenshots/window-switcher.png" alt="Visual Alt+Tab chooser with live previews of demonstration windows" width="400">](assets/screenshots/window-switcher.png) |
+One screenshot per feature. Click any image for full resolution.
 
-| AI Usage · hover to open | Search and choose one provider |
+| Dashboard | Media |
 | --- | --- |
-| [<img src="assets/screenshots/ai-usage-detail.png" alt="AI Usage popup with session and weekly limits and reset times" width="400">](assets/screenshots/ai-usage.png) | [<img src="assets/screenshots/ai-providers-detail.png" alt="Searchable provider selector with Codex, OpenAI, Claude, Antigravity and GitHub Copilot" width="400">](assets/screenshots/ai-providers.png) |
+| [<img src="assets/screenshots/dashboard.png" alt="Calendar, clock, uptime, weather and media overview" width="400">](assets/screenshots/dashboard.png) | [<img src="assets/screenshots/media.png" alt="Media artwork, playback controls, track timeline and lyrics panel" width="400">](assets/screenshots/media.png) |
 
-| Screen recorder and quick controls | Wallpaper and style settings |
+| Performance | Weather |
 | --- | --- |
-| [<img src="assets/screenshots/utilities-detail.png" alt="Utilities panel with screen recorder, keep-awake and quick toggles" width="400">](assets/screenshots/utilities.png) | [<img src="assets/screenshots/appearance.png" alt="Nexus settings for wallpaper, colours, transparency and dark theme" width="400">](assets/screenshots/appearance.png) |
+| [<img src="assets/screenshots/performance.png" alt="Live CPU, GPU, memory, storage, network and battery widgets" width="400">](assets/screenshots/performance.png) | [<img src="assets/screenshots/weather.png" alt="Current weather, sunrise, sunset and seven-day forecast for the demo city London" width="400">](assets/screenshots/weather.png) |
 
-<details>
-<summary>Floating and tiled window layouts</summary>
+| Application launcher · Win+D | Clipboard history · Win+Shift+V |
+| --- | --- |
+| [<img src="assets/screenshots/launcher.png" alt="Application search in the translucent launcher" width="400">](assets/screenshots/launcher.png) | [<img src="assets/screenshots/clipboard.png" alt="Clipboard search with isolated demonstration entries" width="400">](assets/screenshots/clipboard.png) |
+
+| Visual window switcher · Alt+Tab | AI Usage · hover to open |
+| --- | --- |
+| [<img src="assets/screenshots/window-switcher.png" alt="Visual Alt+Tab chooser with previews of demonstration windows" width="400">](assets/screenshots/window-switcher.png) | [<img src="assets/screenshots/ai-usage.png" alt="Selected-provider quota windows, remaining limits and reset times" width="400">](assets/screenshots/ai-usage.png) |
+
+| Notification centre · Win+N | Volume and brightness |
+| --- | --- |
+| [<img src="assets/screenshots/notifications.png" alt="Expanded group of demonstration notifications in the sidebar" width="400">](assets/screenshots/notifications.png) | [<img src="assets/screenshots/audio-brightness.png" alt="On-screen volume percentage and brightness controls" width="400">](assets/screenshots/audio-brightness.png) |
+
+| Region screenshots · Win+Shift+S | Screen recorder and quick controls |
+| --- | --- |
+| [<img src="assets/screenshots/screenshot-selection.png" alt="Screenshot area picker with a selection outline" width="400">](assets/screenshots/screenshot-selection.png) | [<img src="assets/screenshots/utilities.png" alt="Screen recorder, keep-awake control and quick toggles" width="400">](assets/screenshots/utilities.png) |
 
 | Floating windows | Tiled windows |
 | --- | --- |
-| [<img src="assets/screenshots/floating.png" alt="Overlapping floating windows with minimize, maximize and close buttons" width="400">](assets/screenshots/floating.png) | [<img src="assets/screenshots/tiling.png" alt="Two tiled windows with titlebar controls and the running-app sidebar" width="400">](assets/screenshots/tiling.png) |
+| [<img src="assets/screenshots/floating.png" alt="Overlapping floating windows with minimize, maximize and close buttons" width="400">](assets/screenshots/floating.png) | [<img src="assets/screenshots/tiling.png" alt="Tiled windows with titlebar controls and the per-workspace layout toggle" width="400">](assets/screenshots/tiling.png) |
 
-Each workspace remembers its Float/Tiling choice. New workspaces start tiled; Win+V changes an individual window.
+| Wallpaper and style settings | Session controls |
+| --- | --- |
+| [<img src="assets/screenshots/appearance.png" alt="Nexus wallpaper, colours, transparency and dark theme settings" width="400">](assets/screenshots/appearance.png) | [<img src="assets/screenshots/session-controls.png" alt="Session menu for logout, shutdown, hibernate and reboot" width="400">](assets/screenshots/session-controls.png) |
 
-</details>
-
-Real desktop captures with the included [CC0 wallpaper](assets/wallpaper.svg) and a Dracula palette. Terminal text and window selection are staged for demonstration. Installed apps, scale and optional widgets depend on your setup. Click a thumbnail for the full desktop capture. [Screenshot details](assets/README.md).
+Real desktop captures with the included [CC0 wallpaper](assets/wallpaper.svg) and a Dracula palette. Media, notifications, clipboard entries and terminal windows use demonstration content; Weather uses London as a demo location. Hardware statistics are live readings. Installed apps, scale and optional widgets depend on your setup. [Screenshot details](assets/README.md).
 
 ## Features
 
