@@ -15,22 +15,22 @@ A Hyprland desktop for **Pop!_OS 24.04**, with the Caelestia shell, familiar win
 
 | Application launcher · Win+D | Visual window switcher · Alt+Tab |
 | --- | --- |
-| [![Application search in the translucent launcher](assets/screenshots/launcher.png)](assets/screenshots/launcher.png) | [![Visual Alt+Tab chooser with live previews of demonstration windows](assets/screenshots/window-switcher.png)](assets/screenshots/window-switcher.png) |
+| [<img src="assets/screenshots/launcher.png" alt="Application search in the translucent launcher" width="400">](assets/screenshots/launcher.png) | [<img src="assets/screenshots/window-switcher.png" alt="Visual Alt+Tab chooser with live previews of demonstration windows" width="400">](assets/screenshots/window-switcher.png) |
 
 | AI Usage · hover to open | Search and choose one provider |
 | --- | --- |
-| [![AI Usage popup with session and weekly limits and reset times](assets/screenshots/ai-usage-detail.png)](assets/screenshots/ai-usage.png) | [![Searchable provider selector with Codex, OpenAI, Claude, Antigravity and GitHub Copilot](assets/screenshots/ai-providers-detail.png)](assets/screenshots/ai-providers.png) |
+| [<img src="assets/screenshots/ai-usage-detail.png" alt="AI Usage popup with session and weekly limits and reset times" width="400">](assets/screenshots/ai-usage.png) | [<img src="assets/screenshots/ai-providers-detail.png" alt="Searchable provider selector with Codex, OpenAI, Claude, Antigravity and GitHub Copilot" width="400">](assets/screenshots/ai-providers.png) |
 
 | Screen recorder and quick controls | Wallpaper and style settings |
 | --- | --- |
-| [![Utilities panel with screen recorder, keep-awake and quick toggles](assets/screenshots/utilities-detail.png)](assets/screenshots/utilities.png) | [![Nexus settings for wallpaper, colours, transparency and dark theme](assets/screenshots/appearance.png)](assets/screenshots/appearance.png) |
+| [<img src="assets/screenshots/utilities-detail.png" alt="Utilities panel with screen recorder, keep-awake and quick toggles" width="400">](assets/screenshots/utilities.png) | [<img src="assets/screenshots/appearance.png" alt="Nexus settings for wallpaper, colours, transparency and dark theme" width="400">](assets/screenshots/appearance.png) |
 
 <details>
 <summary>Floating and tiled window layouts</summary>
 
 | Floating windows | Tiled windows |
 | --- | --- |
-| [![Overlapping floating windows with minimize, maximize and close buttons](assets/screenshots/floating.png)](assets/screenshots/floating.png) | [![Two tiled windows with titlebar controls and the running-app sidebar](assets/screenshots/tiling.png)](assets/screenshots/tiling.png) |
+| [<img src="assets/screenshots/floating.png" alt="Overlapping floating windows with minimize, maximize and close buttons" width="400">](assets/screenshots/floating.png) | [<img src="assets/screenshots/tiling.png" alt="Two tiled windows with titlebar controls and the running-app sidebar" width="400">](assets/screenshots/tiling.png) |
 
 Each workspace remembers its Float/Tiling choice. New workspaces start tiled; Win+V changes an individual window.
 

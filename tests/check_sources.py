@@ -11,7 +11,10 @@ errors = []
 for document in [*sorted(root.glob('*.md')), *sorted((root / 'docs').rglob('*.md')),
                  *sorted((root / 'assets').rglob('*.md')), root / 'shell/README.md',
                  *sorted((root / '.github').rglob('*.md'))]:
-    for target in re.findall(r'\]\(([^)]+)\)', document.read_text()):
+    content = document.read_text()
+    targets = re.findall(r'\]\(([^)]+)\)', content)
+    targets += re.findall(r'(?:src|href)="([^"]+)"', content)
+    for target in targets:
         if target.startswith(('http:', 'https:', '#', 'mailto:')):
             continue
         target = target.split('#', 1)[0]
