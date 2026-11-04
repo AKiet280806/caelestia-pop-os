@@ -2,14 +2,14 @@
 
 **[Tiếng Việt — bắt đầu cài từ COSMIC](docs/vi/INSTALL.md)** · [English installation](docs/en/INSTALL.md) · [Shortcuts](docs/en/USAGE.md) · [Recovery](docs/en/MAINTENANCE.md)
 
-A source-included Hyprland + Caelestia desktop for **Pop!_OS 24.04, amd64**, with floating windows, familiar window controls, a visual Alt+Tab switcher, and a practical path from the standard COSMIC desktop.
+A source-included Hyprland + Caelestia desktop for **Pop!_OS 24.04, amd64**, with workspace layout controls, familiar window controls, a visual Alt+Tab switcher, and a practical path from the standard COSMIC desktop.
 
 **Version 0.2.0 is a pre-release.** The customized desktop has been exercised on a live machine; the complete installer has **not** been validated on a clean Pop!_OS installation. Static checks and isolated installer tests do not establish that a fresh-machine installation succeeds. Keep COSMIC as your recovery session and read the installation guide before running commands.
 
 ## What you get
 
 - Caelestia sidebar, launcher, notifications, media controls, utilities, and a bar of running windows.
-- Floating windows by default; a global Float/Tiling control and a shortcut to float one window.
+- Tiling by default; an independent Float/Tiling preference for each workspace and a shortcut to float one window.
 - Per-window minimize, maximize/restore, and close controls; independent maximized floating windows.
 - Fullscreen video restores the previous maximized state; volume OSD stays visible above video and shows its percentage.
 - A visual, most-recently-used Alt+Tab chooser. Hold Alt, cycle, then release to commit; the pointer stays put.

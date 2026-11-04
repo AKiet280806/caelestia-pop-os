@@ -1,5 +1,7 @@
 -- Shared window actions: preserve state before entering the shared hidden workspace.
 local home = os.getenv("HOME")
+local workspace_tiling
+local restoring_window
 local runtime = assert(os.getenv("XDG_RUNTIME_DIR"), "XDG_RUNTIME_DIR is required") .. "/caelestia-window-state"
 os.execute("mkdir -p " .. string.format("%q", runtime))
 local function window_for(selector)
@@ -9,6 +11,23 @@ local function window_for(selector)
 end
 local function path(window, kind)
     return runtime .. "/" .. kind .. "-" .. window.stable_id
+end
+local function workspace_key(workspace)
+    if not workspace or workspace.name:match("^special:") then return nil end
+    return (workspace.name:gsub("([^%w%-%_%.%!%~%*%'%(%)])", function(char)
+        return string.format("%%%02X", string.byte(char))
+    end))
+end
+local function remember_origin(window)
+    local key = workspace_key(window.workspace)
+    if not key then return end
+    local file = assert(io.open(path(window, "origin"), "w"))
+    file:write(key); file:close()
+end
+local function origin(window)
+    local file = io.open(path(window, "origin"), "r")
+    if not file then return nil end
+    local key = file:read("*a"); file:close(); return key
 end
 local function snapshot(window)
     return { floating = window.floating, internal = window.fullscreen,
@@ -63,6 +82,7 @@ function caelestia_minimize_window(selector)
     local window = window_for(selector)
     if not window or not window.mapped or window.workspace.name == "special:minimized" then return end
     local state = snapshot(window)
+    remember_origin(window)
     -- A workspace supports one fullscreen window. Never leave hidden windows fullscreen.
     fullscreen(window, 0, 0)
     if state.floating then
@@ -78,13 +98,24 @@ function caelestia_restore_window(selector)
     local workspace = hl.get_active_workspace()
     if not workspace then return end
     local state = load(window, "min") or snapshot(window)
+    if origin(window) and origin(window) ~= workspace_key(workspace) then
+        if workspace_tiling(workspace) then
+            state.floating, state.internal, state.client = false, 0, 0
+        else
+            state = load(window, "float") or state
+            state.floating = true
+        end
+    end
     fullscreen(window, 0, 0)
+    restoring_window = window
     hl.dispatch(hl.dsp.window.move({window = window, workspace = workspace.id, follow = false}))
+    restoring_window = nil
     hl.dispatch(hl.dsp.window.float({window = window, action = state.floating and "enable" or "disable"}))
     if state.floating then geometry(window, state) end
     hl.dispatch(hl.dsp.focus({window = window}))
     fullscreen(window, state.internal, state.client)
     os.remove(path(window, "min"))
+    os.remove(path(window, "origin"))
 end
 function caelestia_minimize_active_window()
     caelestia_minimize_window()
@@ -96,70 +127,93 @@ end)
 hl.on("window.close", function(window)
     os.remove(path(window, "min"))
     os.remove(path(window, "float"))
+    os.remove(path(window, "origin"))
 end)
 
--- One persistent preference controls new windows and the sidebar switch.
+-- Each normal workspace keeps its own preference. The legacy global file is
+-- intentionally ignored; workspaces without an override default to tiling.
 local state_home = os.getenv("XDG_STATE_HOME") or (home .. "/.local/state")
-local mode_dir = state_home .. "/caelestia"
+local mode_dir = state_home .. "/caelestia/workspace-modes"
 os.execute("mkdir -p " .. string.format("%q", mode_dir))
-local mode_path = mode_dir .. "/window-mode"
-local function write_mode(mode)
-    local file = assert(io.open(mode_path .. ".tmp", "w"))
-    file:write(mode .. "\n")
-    file:close()
-    assert(os.rename(mode_path .. ".tmp", mode_path))
+workspace_tiling = function(workspace)
+    local key = workspace_key(workspace)
+    if not key then return true end
+    local file = io.open(mode_dir .. "/ws-" .. key, "r")
+    if not file then return true end
+    local mode = file:read("*l"); file:close()
+    return mode ~= "floating"
 end
-local file = io.open(mode_path, "r")
-local tiling = file and file:read("*l") == "tiling" or false
-if file then file:close() else write_mode("floating") end
-local float_rule = hl.window_rule({name = "caelestia-floating-default", match = {class = ".*"}, float = true})
-float_rule:set_enabled(not tiling)
-
-function caelestia_set_tiling(enabled)
+local function write_mode(workspace, enabled)
+    local destination = mode_dir .. "/ws-" .. assert(workspace_key(workspace))
+    local file = assert(io.open(destination .. ".tmp", "w"))
+    file:write(enabled and "tiling\n" or "floating\n"); file:close()
+    assert(os.rename(destination .. ".tmp", destination))
+end
+local function apply_window_mode(window, enabled)
+    if window.floating == (not enabled) then return end
+    local state = snapshot(window)
+    fullscreen(window, 0, 0)
+    if enabled then
+        local normal = snapshot(window)
+        state.x, state.y, state.width, state.height = normal.x, normal.y, normal.width, normal.height
+        save(window, "float", state)
+        hl.dispatch(hl.dsp.window.float({window = window, action = "disable"}))
+    else
+        state = load(window, "float") or state
+        hl.dispatch(hl.dsp.window.float({window = window, action = "enable"}))
+        geometry(window, state)
+        fullscreen(window, state.internal, state.client)
+        os.remove(path(window, "float"))
+    end
+end
+function caelestia_set_tiling(enabled, workspace_selector)
+    local workspace
+    if workspace_selector ~= nil then workspace = hl.get_workspace(workspace_selector)
+    else workspace = hl.get_active_workspace() end
+    local key = workspace_key(workspace)
+    if not key then return end
     enabled = enabled == true
+    local was_tiling = workspace_tiling(workspace)
     local focused = hl.get_active_window()
-    float_rule:set_enabled(not enabled)
+    write_mode(workspace, enabled)
     for _, window in ipairs(hl.get_windows()) do
-        if window.class ~= "" and window.workspace then
-            if window.workspace.name == "special:minimized" then
+        if window.class ~= "" and window.workspace and not window.pinned then
+            if window.workspace.name == "special:minimized" and origin(window) == key then
                 local state = load(window, "min") or snapshot(window)
                 if enabled then
-                    if not tiling then save(window, "float", state) end
+                    if not was_tiling then save(window, "float", state) end
                     state.floating, state.internal, state.client = false, 0, 0
                 else
                     state = load(window, "float") or state
                     state.floating = true
                 end
                 save(window, "min", state)
-            elseif not window.workspace.name:match("^special:") then
-                local state = snapshot(window)
-                fullscreen(window, 0, 0)
-                if enabled then
-                    if not tiling then
-                        local normal = snapshot(window)
-                        state.x, state.y, state.width, state.height = normal.x, normal.y, normal.width, normal.height
-                        save(window, "float", state)
-                    end
-                    hl.dispatch(hl.dsp.window.float({window = window, action = "disable"}))
-                else
-                    state = load(window, "float") or state
-                    hl.dispatch(hl.dsp.window.float({window = window, action = "enable"}))
-                    geometry(window, state)
-                    fullscreen(window, state.internal, state.client)
-                    os.remove(path(window, "float"))
-                end
+            elseif workspace_key(window.workspace) == key then
+                apply_window_mode(window, enabled)
             end
         end
     end
-    tiling = enabled
-    write_mode(tiling and "tiling" or "floating")
     if focused and focused.mapped and focused.workspace.name ~= "special:minimized" then
         hl.dispatch(hl.dsp.focus({window = focused}))
     end
 end
-function caelestia_toggle_tiling()
-    caelestia_set_tiling(not tiling)
+function caelestia_toggle_tiling(workspace_selector)
+    local workspace
+    if workspace_selector ~= nil then workspace = hl.get_workspace(workspace_selector)
+    else workspace = hl.get_active_workspace() end
+    if workspace then caelestia_set_tiling(not workspace_tiling(workspace), workspace_selector) end
 end
+hl.on("window.open", function(window)
+    if window.workspace and workspace_key(window.workspace) and not window.pinned
+        and not workspace_tiling(window.workspace) then
+        apply_window_mode(window, false)
+    end
+end)
+hl.on("window.move_to_workspace", function(window, workspace)
+    if window ~= restoring_window and workspace_key(workspace) and not window.pinned then
+        apply_window_mode(window, workspace_tiling(workspace))
+    end
+end)
 
 -- Keyboard/taskbar activation must also raise floating windows, like a desktop WM.
 hl.on("window.active", function(window)

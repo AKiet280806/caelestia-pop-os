@@ -16,7 +16,7 @@ shellcheck setup.sh installer/runtime*.sh scripts/build-plugins.sh scripts/start
 ./setup.sh install --dry-run --vietnamese --with-hyprmod --with-ai-usage --scale 1.5
 ```
 
-The installer tests isolate HOME and system destinations in temporary directories. They cover dry-run execution without commands/filesystem changes, unsupported platforms, disk accounting, apt removal rejection, optional template deployment, verified backups, rollback, user-edit conflicts, symlink refusal, hostile manifests, interrupted deployment journals, and cache cleanup boundaries. The 39 unit tests comprise 14 installer safety checks, 5 Codex quota checks and 20 selected-provider backend checks. The usage tests cover normalization, safe source selection, missing credentials, privacy filtering, cancellation of owned child processes and out-of-order provider changes. New usage QML components also pass Qt 6.11.2 qmllint.
+The installer tests isolate HOME and system destinations in temporary directories. They cover dry-run execution without commands/filesystem changes, unsupported platforms, disk accounting, apt removal rejection, optional template deployment, verified backups, rollback, user-edit conflicts, symlink refusal, hostile manifests, interrupted deployment journals, and cache cleanup boundaries. The 40 unit tests comprise 14 installer safety checks, one workspace-layout behavior harness, 5 Codex quota checks and 20 selected-provider backend checks. The usage tests cover normalization, safe source selection, missing credentials, privacy filtering, cancellation of owned child processes and out-of-order provider changes. New usage QML components also pass Qt 6.11.2 qmllint.
 
 The declared apt transaction, including Vietnamese frontends and Hyprland plugin development dependencies, was simulated against the maintainer's Pop!_OS repositories with no removals. This does not ensure the PPA retains the same version indefinitely. The build refuses unavailable exact compositor versions or mismatched headers.
 
@@ -36,6 +36,12 @@ Observed runtime: Hyprland 0.57.0-1ppa3, Quickshell 0.3.1, Qt 6.11.2, Intel + NV
 The fullscreen defect was reproduced before the fix: Brave still reported a maximized browser window, while compositor state dropped to `0/0`. Hyprland 0.57 translates native xdg maximize requests into toggles; Chromium reasserts `set_maximized` after fullscreen exit. Native window actions preserve the prior modes and distinguish this protocol echo from a genuine unmaximize request.
 
 Changing the existing drawers surface's layer while it was occluded did not reliably move its compositor layer. The fix maps a separate, input-transparent Overlay surface only while the fullscreen OSD is active. It does not globally expose the bar over videos. The ordinary OSD remains interactive outside fullscreen.
+
+## Live workspace layout checks
+
+Private Foot windows on two disposable numbered workspaces verified default tiling, changing A to floating without changing B, new windows following A, float → tile → float retaining maximize, B's minimized window restoring tiled after changes to A, normal moves adopting B's tiling, and A retaining its preference after a compositor config reload. Moving another tiled window into B naturally resizes B's tiles; that is not a cross-workspace policy change.
+
+The live sidebar control also verified default Tiling on A, independent Tiling on B, saved Float when returning to A, and toggling A without changing B. Focus/cursor and test-only preference files were restored afterward. The Lua behavior harness covers named-workspace encoding/reload, pinned/special exclusions, hidden-window origin tracking and a toggle targeting the workspace captured at click time. The changed QML passes Qt 6.11.2 qmllint.
 
 ## Live selected-provider usage checks
 

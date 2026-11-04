@@ -42,7 +42,7 @@ Không thêm Win+R trùng launcher. Ctrl+Tab/Ctrl+Shift+Tab vẫn do từng app 
 
 Thanh tiêu đề có nút thu nhỏ, phóng to/khôi phục và đóng. Nhấp đúp thanh tiêu đề để phóng to/khôi phục. Phóng to khác toàn màn hình: khi toàn màn hình che thanh tiêu đề/sidebar, dùng Win+F để thoát. Các cửa sổ nổi giữ trạng thái phóng to riêng khi đổi app. Plugin native đồng bộ thao tác cửa sổ từ chính ứng dụng.
 
-Nút **Float/Tiling** trên sidebar đổi chế độ bố cục chung. Win+V chỉ đổi một cửa sổ. Khi thử xếp ô, giữ một terminal mở để dễ xử lý bố cục không như ý.
+Nút **Float/Tiling** trên sidebar chỉ đổi workspace đang đứng. Workspace mới mặc định tiling; mỗi workspace lưu lựa chọn riêng qua các lần đăng nhập. Nút tự cập nhật khi đổi workspace. App mở mới hoặc chuyển sang workspace khác theo chế độ của workspace đích; cửa sổ ghim và special workspace không bị đổi. Win+V vẫn chỉ đổi một cửa sổ. Khi thử xếp ô, giữ một terminal mở để dễ xử lý bố cục không như ý.
 
 Thanh app đang chạy có một biểu tượng cho mỗi cửa sổ, kể cả ở workspace khác hoặc đã thu nhỏ. Rê để xem tên; cuộn nếu danh sách dài. Bấm icon đang chọn để thu nhỏ, bấm icon khác để chuyển sang, bấm icon đã thu nhỏ để mở tại workspace hiện tại. Dấu cạnh dài chỉ cửa sổ đang chọn; icon mờ chỉ cửa sổ thu nhỏ. Win+Shift+M chỉ mở lại nhóm đã lưu bởi Win+M, không kéo theo các cửa sổ đã thu nhỏ từ trước.
 

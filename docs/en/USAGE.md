@@ -42,7 +42,7 @@ There is no duplicate Win+R launcher binding. Ctrl+Tab and Ctrl+Shift+Tab remain
 
 The titlebar has minimize, maximize/restore, and close buttons. Double-click the titlebar to maximize/restore. Maximizing differs from fullscreen: fullscreen can hide shell/titlebar controls, so press Win+F to leave it. Maximized floating windows keep their own state when you switch apps. Native application window actions are routed through the matching native plugin.
 
-The sidebar's **Float/Tiling** control changes the global layout policy. Win+V affects one window. When experimenting with tiling, keep a terminal accessible and use the shortcut to recover awkward window placement.
+The sidebar's **Float/Tiling** control changes only the focused workspace. New workspaces default to tiling; each workspace remembers its choice across sessions. The button follows the current workspace. New windows and normal moves follow the destination workspace's mode. Special workspaces and pinned windows are excluded. Win+V still affects one window. When experimenting with tiling, keep a terminal accessible and use the shortcut to recover awkward window placement.
 
 The running-app bar shows one item per window, including windows on other workspaces and minimized windows. Hover for the title, scroll when the list is long. Click the selected window's icon to minimize it; click another to focus; click a minimized one to restore to your current workspace. A longer marker indicates selection; dimmed icons indicate minimized windows. Win+Shift+M restores only its stored batch, preserving windows minimized before that batch.
 
