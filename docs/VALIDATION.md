@@ -16,7 +16,7 @@ shellcheck setup.sh installer/runtime*.sh scripts/build-plugins.sh scripts/start
 ./setup.sh install --dry-run --vietnamese --with-hyprmod --with-ai-usage --scale 1.5
 ```
 
-The installer tests isolate HOME and system destinations in temporary directories. They cover dry-run execution without commands/filesystem changes, unsupported platforms, disk accounting, apt removal rejection, optional template deployment, verified backups, rollback, user-edit conflicts, symlink refusal, hostile manifests, interrupted deployment journals, and cache cleanup boundaries. The 43 unit tests comprise 14 installer safety checks, one workspace-layout behavior harness, 3 wallpaper fallback checks, 5 Codex quota checks and 20 selected-provider backend checks. The usage tests cover normalization, safe source selection, missing credentials, privacy filtering, cancellation of owned child processes and out-of-order provider changes. New usage QML components also pass Qt 6.11.2 qmllint.
+The installer tests isolate HOME and system destinations in temporary directories. They cover dry-run execution without commands/filesystem changes, unsupported platforms, disk accounting, apt removal rejection, optional template deployment, verified backups, rollback, user-edit conflicts, symlink refusal, hostile manifests, interrupted deployment journals, and cache cleanup boundaries. The 48 unit tests comprise 14 installer safety checks, one workspace-layout behavior harness, 8 wallpaper fallback checks, 5 Codex quota checks and 20 selected-provider backend checks. The usage tests cover normalization, safe source selection, missing credentials, privacy filtering, cancellation of owned child processes and out-of-order provider changes. New usage QML components also pass Qt 6.11.2 qmllint.
 
 The declared apt transaction, including Vietnamese frontends and Hyprland plugin development dependencies, was simulated against the maintainer's Pop!_OS repositories with no removals. This does not ensure the PPA retains the same version indefinitely. The build refuses unavailable exact compositor versions or mismatched headers.
 
@@ -42,6 +42,14 @@ Changing the existing drawers surface's layer while it was occluded did not reli
 The original image and its cache decoded correctly while the running Qt image reported Ready/opacity 1, but `hyprctl -j layers` showed `caelestia-background` at alpha 0. Hyprland 0.57's layer mapping path skips the initial animation when mapping under covering fullscreen. An isolated layer fixture also reproduced alpha 0. Dynamically hiding/remapping the Qt background caused a Qt 6.11.2 `QQuickRenderControl` crash; that experiment was reverted and is not shipped.
 
 The shipped recovery uses the already installed hyprpaper 0.8+ in its own contained `caelestia-wallpaper.service`, ordered before the shell. The original wallpaper was verified visually on an empty workspace. Selecting an identical image copy through Caelestia synchronized to hyprpaper, then the original selection was restored. This is a wallpaper fallback rather than a compositor patch. Fresh-login ordering and every monitor/fullscreen combination remain unverified.
+
+### Native wallpaper transitions and taskbar wheel behavior
+
+An always-visible hyprpaper surface covered the restored Caelestia background and replaced its animated changes with hard cuts. The fallback controller now enters standby when every monitor has a visible Caelestia background, waits two seconds before retiring its own renderer, and starts recovery only when the primary layer is missing/transparent and fullscreen no longer covers the output. IPC failures preserve an existing fallback. Unit checks cover standby, recovery, fullscreen scope and owned-process cleanup.
+
+A live capture sampled 18 frames over about one second while selecting an existing test wallpaper on an empty workspace. Intermediate image frames were observed, hyprpaper stayed absent, and the original selection/workspace/focus/cursor were restored. This validates an animated transition, not a sustained frame-rate guarantee.
+
+The inherited top-half volume and bottom-half brightness wheel zones are disabled in both the shipped config and native defaults. The effective `eDP-1` configuration was read through the Caelestia module and confirmed both false with workspace scrolling still true. Physical wheel injection was unavailable under the Wayland automation interface; no audio or brightness was changed for verification.
 
 ## Live workspace layout checks
 

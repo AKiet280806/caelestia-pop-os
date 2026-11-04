@@ -104,3 +104,5 @@ Nếu đã cài, mở `hyprmod` từ launcher hoặc terminal. Chủ động xem
 Ưu tiên Wayland native nếu trình duyệt hỗ trợ. Với Brave, xem `brave://version`, `brave://gpu`, thử mở riêng với `--ozone-platform=wayland`. Phiên Brave đang chạy có thể bỏ qua cờ mới. Bản Flatpak có thể lưu cờ tại `~/.var/app/com.brave.Browser/config/brave-flags.conf`; giữ cờ cũ và chỉ thêm `--ozone-platform=wayland` nếu cần. Tự lưu biểu mẫu/công việc trước khi đóng và mở lại trình duyệt. Installer giữ trình duyệt mặc định, không ghi đè profile.
 
 Xem [AI Usage](../AI-USAGE.md) để chọn một nhà cung cấp và cấu hình nguồn usage.
+
+Hai vùng chỉnh âm lượng/độ sáng bằng con lăn trên toàn thanh bar được tắt mặc định. Lăn trên danh sách app chỉ cuộn danh sách khi dài; lăn trên vùng workspace vẫn chuyển workspace. Dùng phím âm lượng/độ sáng hoặc các điều khiển tương ứng để chỉnh.

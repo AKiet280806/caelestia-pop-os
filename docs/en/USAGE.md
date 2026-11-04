@@ -104,3 +104,5 @@ If installed, launch `hyprmod` from the app launcher or terminal. Save monitor/s
 Use the browser's native Wayland mode when possible. For Brave, inspect `brave://version` and `brave://gpu`. Test a separate launch with `--ozone-platform=wayland`; an already running instance may ignore new startup flags. For the Brave Flatpak, flags can be stored in `~/.var/app/com.brave.Browser/config/brave-flags.conf`. Preserve existing flags and append only `--ozone-platform=wayland` if needed. Save forms and work before closing/reopening the browser yourself. This installer retains your chosen browser and does not overwrite browser profiles.
 
 For the single-provider AI Usage selector and account setup, see [AI Usage](../AI-USAGE.md).
+
+The taskbar's global volume/brightness wheel zones are disabled by default. Scrolling over running apps only scrolls that list when it overflows; scrolling over workspace indicators still switches workspaces. Use media/brightness keys or the explicit controls for those settings.

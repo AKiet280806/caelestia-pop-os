@@ -124,8 +124,8 @@
       "tray": true
     },
     "scrollActions": {
-      "brightness": true,
-      "volume": true,
+      "brightness": false,
+      "volume": false,
       "workspaces": true
     },
     "showOnHover": true,
