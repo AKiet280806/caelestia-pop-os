@@ -126,3 +126,9 @@ The compatibility service name is `caelestia-codex-usage.service`; generic cache
 ## Missing hyprland-guiutils at login
 
 `hyprland-guiutils` provides Hyprland dialogs, including permission prompts. It is a required runtime package in this installer. Check `command -v hyprland-dialog` and `apt-cache policy hyprland-guiutils`. For an older installation, simulate `apt-get -s --no-install-recommends install hyprland-guiutils`, check that it removes nothing and retains the pinned compositor, then install with `sudo apt-get install --no-remove --no-install-recommends hyprland-guiutils`. Do not hide the warning by disabling the GUI-utilities check. A new login is the final check for a startup-only warning; do not restart the compositor during active work.
+
+## Black wallpaper after replacing the shell
+
+Hyprland 0.57 can leave a background layer at compositor alpha 0 when it maps during fullscreen, even though Qt reports the image Ready and opaque. The packaged `caelestia-wallpaper.service` runs hyprpaper independently, before the shell, and follows the selected image in `~/.local/state/caelestia/wallpaper/path.txt`. Inspect `systemctl --user status caelestia-wallpaper.service` and `hyprctl hyprpaper listactive`. No image is deleted or replaced. The bridge uses hyprpaper 0.8+ IPC and rejects comma/newline-containing filenames because commas delimit its IPC fields.
+
+The text `Segmentation fault (core dumped)` can also be a built-in Hyprland splash, rather than evidence of a crash. Confirm a real crash using its process logs or crash report. Existing applications launched by the shell may still share its systemd control group; restarting that service can terminate those applications. Save work and inspect the process group before restarting it. The wallpaper fallback does not require a shell restart.

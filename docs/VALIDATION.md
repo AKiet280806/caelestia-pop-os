@@ -16,7 +16,7 @@ shellcheck setup.sh installer/runtime*.sh scripts/build-plugins.sh scripts/start
 ./setup.sh install --dry-run --vietnamese --with-hyprmod --with-ai-usage --scale 1.5
 ```
 
-The installer tests isolate HOME and system destinations in temporary directories. They cover dry-run execution without commands/filesystem changes, unsupported platforms, disk accounting, apt removal rejection, optional template deployment, verified backups, rollback, user-edit conflicts, symlink refusal, hostile manifests, interrupted deployment journals, and cache cleanup boundaries. The 40 unit tests comprise 14 installer safety checks, one workspace-layout behavior harness, 5 Codex quota checks and 20 selected-provider backend checks. The usage tests cover normalization, safe source selection, missing credentials, privacy filtering, cancellation of owned child processes and out-of-order provider changes. New usage QML components also pass Qt 6.11.2 qmllint.
+The installer tests isolate HOME and system destinations in temporary directories. They cover dry-run execution without commands/filesystem changes, unsupported platforms, disk accounting, apt removal rejection, optional template deployment, verified backups, rollback, user-edit conflicts, symlink refusal, hostile manifests, interrupted deployment journals, and cache cleanup boundaries. The 43 unit tests comprise 14 installer safety checks, one workspace-layout behavior harness, 3 wallpaper fallback checks, 5 Codex quota checks and 20 selected-provider backend checks. The usage tests cover normalization, safe source selection, missing credentials, privacy filtering, cancellation of owned child processes and out-of-order provider changes. New usage QML components also pass Qt 6.11.2 qmllint.
 
 The declared apt transaction, including Vietnamese frontends and Hyprland plugin development dependencies, was simulated against the maintainer's Pop!_OS repositories with no removals. This does not ensure the PPA retains the same version indefinitely. The build refuses unavailable exact compositor versions or mismatched headers.
 
@@ -36,6 +36,12 @@ Observed runtime: Hyprland 0.57.0-1ppa3, Quickshell 0.3.1, Qt 6.11.2, Intel + NV
 The fullscreen defect was reproduced before the fix: Brave still reported a maximized browser window, while compositor state dropped to `0/0`. Hyprland 0.57 translates native xdg maximize requests into toggles; Chromium reasserts `set_maximized` after fullscreen exit. Native window actions preserve the prior modes and distinguish this protocol echo from a genuine unmaximize request.
 
 Changing the existing drawers surface's layer while it was occluded did not reliably move its compositor layer. The fix maps a separate, input-transparent Overlay surface only while the fullscreen OSD is active. It does not globally expose the bar over videos. The ordinary OSD remains interactive outside fullscreen.
+
+## Wallpaper regression and recovery
+
+The original image and its cache decoded correctly while the running Qt image reported Ready/opacity 1, but `hyprctl -j layers` showed `caelestia-background` at alpha 0. Hyprland 0.57's layer mapping path skips the initial animation when mapping under covering fullscreen. An isolated layer fixture also reproduced alpha 0. Dynamically hiding/remapping the Qt background caused a Qt 6.11.2 `QQuickRenderControl` crash; that experiment was reverted and is not shipped.
+
+The shipped recovery uses the already installed hyprpaper 0.8+ in its own contained `caelestia-wallpaper.service`, ordered before the shell. The original wallpaper was verified visually on an empty workspace. Selecting an identical image copy through Caelestia synchronized to hyprpaper, then the original selection was restored. This is a wallpaper fallback rather than a compositor patch. Fresh-login ordering and every monitor/fullscreen combination remain unverified.
 
 ## Live workspace layout checks
 

@@ -16,7 +16,7 @@ for document in [root / 'README.md', root / 'AGENTS.md', *sorted((root / 'docs')
         if target and not (document.parent / target).exists():
             errors.append(f'{document.relative_to(root)}: missing {target}')
 for path in [*sorted((root / 'installer').glob('*.py')), *sorted((root / 'scripts').glob('*.py')),
-             root / 'src/cli-overrides/record.py', root / 'src/codex-usage/codex_usage.py', root / 'src/ai-usage/ai_usage.py']:
+             root / 'src/wallpaper-fallback/wallpaper_fallback.py', root / 'src/cli-overrides/record.py', root / 'src/codex-usage/codex_usage.py', root / 'src/ai-usage/ai_usage.py']:
     compile(path.read_bytes(), str(path), 'exec')
 lua = shutil.which('luac5.4') or shutil.which('luac')
 if not lua:

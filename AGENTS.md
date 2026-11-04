@@ -22,6 +22,8 @@ Create and verify a versioned backup and deployment manifest before replacing ma
 
 ## Protect the current session and private data
 
+Applications launched from the shell may share its systemd control group; inspect the group before a service restart, which can terminate those applications. The independent wallpaper fallback should be used for wallpaper recovery. A visibility-remapping wallpaper experiment crashed Qt 6.11.2 and must not be reintroduced.
+
 Do not start Caelestia inside COSMIC, restart the display manager, log the user out, reboot, or suspend their desktop. Hand login, password entry, physical display inspection, and disruptive sleep/monitor checks to the human. Continue independent read-only or repository work while those checks are pending.
 
 Never request or store a sudo password. Use the platform's normal authentication interaction. Never copy or commit Codex authentication, `.ssh`, tokens, clipboard contents, browser history, recordings, or private logs. Sanitize local usernames and home paths in public examples and issue evidence. Inspect staged content before committing; do not stage whole home/config trees.

@@ -456,6 +456,7 @@ def targets(paths):
         'profile': paths.config / 'caelestia-pop-os',
         'portal': paths.config / 'xdg-desktop-portal/hyprland-portals.conf',
         'wallpaper': paths.data / 'wallpapers/wallpaper.png',
+        'wallpaper-backend': paths.data / 'wallpaper-fallback',
         'codex-backend': paths.data / 'codex-usage',
         'ai-backend': paths.data / 'ai-usage',
         'fcitx-profile': paths.config / 'fcitx5/profile',
@@ -463,7 +464,7 @@ def targets(paths):
     }
     for name in ('start-caelestia-session', 'start-caelestia-services', 'start-fcitx-unikey', 'caelestia-open-browser', 'caelestia-open-files'):
         result['helper-' + name] = paths.home / '.local/bin' / name
-    for name in ('caelestia-shell.service', 'caelestia-clipboard@.service', 'caelestia-codex-usage.service'):
+    for name in ('caelestia-shell.service', 'caelestia-wallpaper.service', 'caelestia-clipboard@.service', 'caelestia-codex-usage.service'):
         result['unit-' + name] = paths.config / 'systemd/user' / name
     result.update({key: paths.system(key) for key in SYSTEM_DESTINATIONS})
     return result
@@ -524,6 +525,7 @@ def render_templates(args, paths, staging):
     (profile / 'profile.env').write_text(''.join(f'export {key}={shlex.quote(value)}\n' for key, value in env.items()))
     add('portal', ROOT / 'configs/xdg-desktop-portal/hyprland-portals.conf')
     add('wallpaper', ROOT / 'assets/wallpaper.png')
+    add('wallpaper-backend', ROOT / 'src/wallpaper-fallback')
     helpers = {'start-caelestia-session': 'start-caelestia-session', 'start-caelestia-services': 'start-caelestia-services',
                'start-fcitx-unikey': 'start-fcitx-unikey', 'caelestia-open-browser': 'open-browser', 'caelestia-open-files': 'open-files'}
     for target, source in helpers.items():
@@ -532,7 +534,7 @@ def render_templates(args, paths, staging):
         add('helper-' + target, ROOT / 'scripts' / source, executable=True)
     codex_path = Path(shutil.which('codex') or '/usr/bin/codex').parent
     replacements = {'@HOME@': str(paths.home), '@DATA@': str(paths.data_root), '@CODEX_PATH@': str(codex_path)}
-    for name in ('caelestia-shell.service', 'caelestia-clipboard@.service', 'caelestia-codex-usage.service'):
+    for name in ('caelestia-shell.service', 'caelestia-wallpaper.service', 'caelestia-clipboard@.service', 'caelestia-codex-usage.service'):
         if name == 'caelestia-codex-usage.service' and not args.with_codex:
             continue
         source = ROOT / 'configs/systemd/user' / name
@@ -651,11 +653,13 @@ def doctor(args, paths):
     for label, path in [('quickshell', Path('/usr/local/bin/qs')),
                         ('cli', paths.data / 'bin/caelestia'),
                         ('shell-source', paths.config / 'quickshell/caelestia/shell.qml'),
+                        ('wallpaper-backend', paths.data / 'wallpaper-fallback/wallpaper_fallback.py'),
                         ('session-entry', paths.system('session-desktop')),
                         ('pam', paths.system('pam')),
                         ('hyprbars', paths.data_root / 'hypr/plugins/hyprbars-0.57.0.so'),
                         ('native-actions', paths.data_root / 'hypr/plugins/native-minimize-0.57.0.so')]:
         check(label, path.is_file(), str(path))
+    check('hyprpaper', shutil.which('hyprpaper') is not None, 'Independent wallpaper fallback')
     check('hyprland-dialog', shutil.which('hyprland-dialog') is not None, 'hyprland-guiutils supplies compositor dialogs and permission prompts.')
     qs = discover(['/usr/local/bin/qs', '--version'])
     check('quickshell-version', qs and '0.3.1' in qs, qs)
@@ -673,6 +677,7 @@ def doctor(args, paths):
         plugin_list = discover(['hyprctl', 'plugin', 'list']) or ''
         check('loaded-plugins', 'hyprbars' in plugin_list and 'native-minimize' in plugin_list, plugin_list)
         check('shell-service', discover(['systemctl', '--user', 'is-active', 'caelestia-shell.service']) == 'active', 'Active shell required in Hyprland.')
+        check('wallpaper-service', discover(['systemctl', '--user', 'is-active', 'caelestia-wallpaper.service']) == 'active', 'Independent fallback should remain active across shell replacement.')
     else:
         pending.append('Hyprland login, loaded plugins, active shell and interactive GPU checks')
     return {'ok': all(c['ok'] for c in checks), 'checks': checks, 'pending': pending,

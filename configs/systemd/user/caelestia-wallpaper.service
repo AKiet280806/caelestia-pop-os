@@ -1,0 +1,18 @@
+[Unit]
+Description=Independent wallpaper fallback for Caelestia
+PartOf=graphical-session.target
+Before=caelestia-shell.service
+ConditionEnvironment=HYPRLAND_INSTANCE_SIGNATURE
+ConditionEnvironment=XDG_CURRENT_DESKTOP=Hyprland
+
+[Service]
+Type=notify
+NotifyAccess=main
+Environment="PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/usr/bin/python3 "@DATA@/caelestia-pop-os/wallpaper-fallback/wallpaper_fallback.py"
+Restart=on-failure
+RestartSec=3
+TimeoutStartSec=20
+TimeoutStopSec=5
+NoNewPrivileges=yes
+UMask=0077

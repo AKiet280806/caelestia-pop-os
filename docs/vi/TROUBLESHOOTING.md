@@ -126,3 +126,9 @@ Service giữ tên cũ `caelestia-codex-usage.service` để tương thích; xem
 ## Báo thiếu hyprland-guiutils khi đăng nhập
 
 `hyprland-guiutils` cung cấp hộp thoại Hyprland, gồm hộp thoại xin quyền, và là gói runtime bắt buộc của bộ cài. Kiểm tra `command -v hyprland-dialog` và `apt-cache policy hyprland-guiutils`. Nếu đã cài bằng phiên bản cũ: mô phỏng `apt-get -s --no-install-recommends install hyprland-guiutils`, bảo đảm không gỡ gói hoặc đổi bản compositor đã ghim, rồi cài bằng `sudo apt-get install --no-remove --no-install-recommends hyprland-guiutils`. Không tắt kiểm tra GUI utilities để che cảnh báo. Xác nhận cảnh báo khởi động trong lần đăng nhập kế tiếp; không khởi động lại compositor khi đang làm việc.
+
+## Hình nền đen sau khi nạp lại shell
+
+Hyprland 0.57 có thể để lớp nền ở alpha 0 nếu nó xuất hiện khi đang fullscreen, dù Qt đã tải ảnh xong. Dịch vụ `caelestia-wallpaper.service` chạy hyprpaper độc lập, trước shell, và theo dõi ảnh đang chọn tại `~/.local/state/caelestia/wallpaper/path.txt`. Kiểm tra `systemctl --user status caelestia-wallpaper.service` và `hyprctl hyprpaper listactive`. Ảnh gốc không bị xóa hay thay thế. Bridge dùng IPC hyprpaper 0.8+; tên file chứa dấu phẩy hoặc xuống dòng chưa được hỗ trợ vì dấu phẩy phân cách các trường IPC.
+
+Dòng `Segmentation fault (core dumped)` cũng có thể là câu splash có sẵn của Hyprland. Chỉ kết luận crash khi có log/report tương ứng. App mở từ launcher có thể vẫn thuộc nhóm tiến trình systemd của shell; restart dịch vụ shell có thể đóng các app đó. Lưu công việc và kiểm tra nhóm tiến trình trước khi restart. Dịch vụ hình nền độc lập không cần restart shell.

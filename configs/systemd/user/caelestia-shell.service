@@ -1,5 +1,7 @@
 [Unit]
 Description=Caelestia Shell for the Hyprland session
+Wants=caelestia-wallpaper.service
+After=caelestia-wallpaper.service
 ConditionEnvironment=HYPRLAND_INSTANCE_SIGNATURE
 ConditionEnvironment=XDG_CURRENT_DESKTOP=Hyprland
 StartLimitIntervalSec=60

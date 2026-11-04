@@ -11,6 +11,7 @@ A source-included Hyprland + Caelestia desktop for **Pop!_OS 24.04, amd64**, wit
 - Caelestia sidebar, launcher, notifications, media controls, utilities, and a bar of running windows.
 - Tiling by default; an independent Float/Tiling preference for each workspace and a shortcut to float one window.
 - Per-window minimize, maximize/restore, and close controls; independent maximized floating windows.
+- An independent hyprpaper fallback preserves the selected wallpaper across shell replacements.
 - Fullscreen video restores the previous maximized state; volume OSD stays visible above video and shows its percentage.
 - A visual, most-recently-used Alt+Tab chooser. Hold Alt, cycle, then release to commit; the pointer stays put.
 - Foot terminal, retained COSMIC Files, your existing default browser, clipboard history, screenshots, and screen recording with speaker audio.
