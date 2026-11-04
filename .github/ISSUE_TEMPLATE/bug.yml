@@ -1,0 +1,30 @@
+name: Bug report
+description: Report a desktop or installer problem. English and Vietnamese are welcome.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Explain what you expected and what happened instead. Add a screenshot for visual problems.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include the failing installer stage or the desktop actions that trigger the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Repository revision, OS, GPU/driver, display scale, session and selected install options.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Relevant diagnostics
+      description: Paste focused doctor output or error excerpts. Remove tokens, account details, private paths and application content before sharing.
+      render: text

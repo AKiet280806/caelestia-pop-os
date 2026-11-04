@@ -2,7 +2,7 @@
 
 [Tiếng Việt](../vi/USAGE.md) · [Install](INSTALL.md) · [Troubleshoot](TROUBLESHOOTING.md)
 
-**Win / Super** means the Windows-logo key. Windows float by default. Click a window to focus it; passing the mouse over another window does not select it, and app/workspace switching does not warp your pointer.
+**Win / Super** means the Windows-logo key. New workspaces use tiling by default; each workspace remembers its Float/Tiling choice. Click a window to focus it; passing the mouse over another window does not select it, and app/workspace switching does not warp your pointer.
 
 ## Keyboard reference
 
@@ -45,6 +45,8 @@ The titlebar has minimize, maximize/restore, and close buttons. Double-click the
 The sidebar's **Float/Tiling** control changes only the focused workspace. New workspaces default to tiling; each workspace remembers its choice across sessions. The button follows the current workspace. New windows and normal moves follow the destination workspace's mode. Special workspaces and pinned windows are excluded. Win+V still affects one window. When experimenting with tiling, keep a terminal accessible and use the shortcut to recover awkward window placement.
 
 The running-app bar shows one item per window, including windows on other workspaces and minimized windows. Hover for the title, scroll when the list is long. Click the selected window's icon to minimize it; click another to focus; click a minimized one to restore to your current workspace. A longer marker indicates selection; dimmed icons indicate minimized windows. Win+Shift+M restores only its stored batch, preserving windows minimized before that batch.
+
+The taskbar's global volume/brightness wheel zones are disabled by default. Scrolling over running apps only scrolls that list when it overflows; scrolling over workspace indicators still switches workspaces. Use media/brightness keys or the explicit controls for those settings.
 
 ## Visual Alt+Tab
 
@@ -102,7 +104,3 @@ If installed, launch `hyprmod` from the app launcher or terminal. Save monitor/s
 ## Sharp browser text on fractional scale
 
 Use the browser's native Wayland mode when possible. For Brave, inspect `brave://version` and `brave://gpu`. Test a separate launch with `--ozone-platform=wayland`; an already running instance may ignore new startup flags. For the Brave Flatpak, flags can be stored in `~/.var/app/com.brave.Browser/config/brave-flags.conf`. Preserve existing flags and append only `--ozone-platform=wayland` if needed. Save forms and work before closing/reopening the browser yourself. This installer retains your chosen browser and does not overwrite browser profiles.
-
-For the single-provider AI Usage selector and account setup, see [AI Usage](../AI-USAGE.md).
-
-The taskbar's global volume/brightness wheel zones are disabled by default. Scrolling over running apps only scrolls that list when it overflows; scrolling over workspace indicators still switches workspaces. Use media/brightness keys or the explicit controls for those settings.

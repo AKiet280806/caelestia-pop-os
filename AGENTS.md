@@ -1,6 +1,6 @@
 # Instructions for AI agents
 
-This repository installs a modified Caelestia desktop alongside COSMIC on **Pop!_OS 24.04 amd64**. Start with [the execution runbook](docs/agent/INSTALL.md), then [first-session verification](docs/agent/VERIFY.md). Use [recovery](docs/agent/RECOVERY.md) for failed stages and [handoff](docs/agent/HANDOFF.md) when another agent or a human must continue.
+This repository installs a modified Caelestia desktop alongside COSMIC on **Pop!_OS 24.04 amd64**. Start with [the execution runbook](docs/agent/INSTALL.md), then [first-session verification](docs/agent/VERIFY.md). Use [recovery](docs/agent/RECOVERY.md) for failed stages.
 
 ## Scope and evidence
 
@@ -35,3 +35,5 @@ AI usage is optional and shows exactly one selected provider. See [AI Usage](doc
 Keep runtime source in `shell/`, native plugin source in `src/native-window-actions/`, CLI overrides in `src/cli-overrides/`, generic usage in `src/ai-usage/`, and the Codex RPC client in `src/codex-usage/`. Preserve upstream licensing and provenance. Keep human installation documentation and this agent runbook consistent with `./setup.sh --help` and the actual implementation.
 
 Use repository tests and read-only checks appropriate to the change. Deploy tests must isolate HOME and system prefixes. A dry run must not install apt packages, add repositories, build/install into real prefixes, replace user files, or start services. After tests, report what ran and what it establishes. Do not invent test outcomes, JSON keys, service names, package versions, or paths when the implementation can be inspected.
+
+Keep development plans, activity diaries and host-specific validation reports outside the public repository. User-facing guides and reusable verification instructions belong in `docs/`; local execution records do not.

@@ -2,7 +2,7 @@
 
 [English](../en/USAGE.md) · [Cài đặt](INSTALL.md) · [Khắc phục lỗi](TROUBLESHOOTING.md)
 
-**Win / Super** là phím logo Windows. Mặc định cửa sổ ở dạng nổi. Click để chọn cửa sổ; rê chuột qua app khác không tự đổi focus. Đổi app/workspace không tự kéo con trỏ đi nơi khác.
+**Win / Super** là phím logo Windows. Workspace mới mặc định xếp ô (tiling); mỗi workspace nhớ lựa chọn Float/Tiling riêng. Click để chọn cửa sổ; rê chuột qua app khác không tự đổi focus. Đổi app/workspace không tự kéo con trỏ đi nơi khác.
 
 ## Bảng phím tắt
 
@@ -45,6 +45,8 @@ Thanh tiêu đề có nút thu nhỏ, phóng to/khôi phục và đóng. Nhấp 
 Nút **Float/Tiling** trên sidebar chỉ đổi workspace đang đứng. Workspace mới mặc định tiling; mỗi workspace lưu lựa chọn riêng qua các lần đăng nhập. Nút tự cập nhật khi đổi workspace. App mở mới hoặc chuyển sang workspace khác theo chế độ của workspace đích; cửa sổ ghim và special workspace không bị đổi. Win+V vẫn chỉ đổi một cửa sổ. Khi thử xếp ô, giữ một terminal mở để dễ xử lý bố cục không như ý.
 
 Thanh app đang chạy có một biểu tượng cho mỗi cửa sổ, kể cả ở workspace khác hoặc đã thu nhỏ. Rê để xem tên; cuộn nếu danh sách dài. Bấm icon đang chọn để thu nhỏ, bấm icon khác để chuyển sang, bấm icon đã thu nhỏ để mở tại workspace hiện tại. Dấu cạnh dài chỉ cửa sổ đang chọn; icon mờ chỉ cửa sổ thu nhỏ. Win+Shift+M chỉ mở lại nhóm đã lưu bởi Win+M, không kéo theo các cửa sổ đã thu nhỏ từ trước.
+
+Hai vùng chỉnh âm lượng/độ sáng bằng con lăn trên toàn thanh bar được tắt mặc định. Lăn trên danh sách app chỉ cuộn danh sách khi dài; lăn trên vùng workspace vẫn chuyển workspace. Dùng phím âm lượng/độ sáng hoặc các điều khiển tương ứng để chỉnh.
 
 ## Bảng Alt+Tab có ảnh xem trước
 
@@ -102,7 +104,3 @@ Nếu đã cài, mở `hyprmod` từ launcher hoặc terminal. Chủ động xem
 ## Chữ trình duyệt sắc nét khi dùng scale lẻ
 
 Ưu tiên Wayland native nếu trình duyệt hỗ trợ. Với Brave, xem `brave://version`, `brave://gpu`, thử mở riêng với `--ozone-platform=wayland`. Phiên Brave đang chạy có thể bỏ qua cờ mới. Bản Flatpak có thể lưu cờ tại `~/.var/app/com.brave.Browser/config/brave-flags.conf`; giữ cờ cũ và chỉ thêm `--ozone-platform=wayland` nếu cần. Tự lưu biểu mẫu/công việc trước khi đóng và mở lại trình duyệt. Installer giữ trình duyệt mặc định, không ghi đè profile.
-
-Xem [AI Usage](../AI-USAGE.md) để chọn một nhà cung cấp và cấu hình nguồn usage.
-
-Hai vùng chỉnh âm lượng/độ sáng bằng con lăn trên toàn thanh bar được tắt mặc định. Lăn trên danh sách app chỉ cuộn danh sách khi dài; lăn trên vùng workspace vẫn chuyển workspace. Dùng phím âm lượng/độ sáng hoặc các điều khiển tương ứng để chỉnh.

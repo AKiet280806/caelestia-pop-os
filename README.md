@@ -1,28 +1,57 @@
 # Caelestia for Pop!_OS
 
-**[Tiếng Việt — bắt đầu cài từ COSMIC](docs/vi/INSTALL.md)** · [English installation](docs/en/INSTALL.md) · [Shortcuts](docs/en/USAGE.md) · [Recovery](docs/en/MAINTENANCE.md)
+A Hyprland desktop for **Pop!_OS 24.04**, with the Caelestia shell, familiar window controls, and a guided installation from COSMIC.
 
-A source-included Hyprland + Caelestia desktop for **Pop!_OS 24.04, amd64**, with workspace layout controls, familiar window controls, a visual Alt+Tab switcher, and a practical path from the standard COSMIC desktop.
+[![Source checks](https://github.com/AKiet280806/caelestia-pop-os/actions/workflows/checks.yml/badge.svg)](https://github.com/AKiet280806/caelestia-pop-os/actions/workflows/checks.yml)
+![Platform: Pop!_OS 24.04 amd64](https://img.shields.io/badge/Pop!__OS-24.04_amd64-48B9C7)
+![Status: 0.2.0 pre-release](https://img.shields.io/badge/status-0.2.0_pre--release-bd93f9)
+[![License: GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE)
 
-**Version 0.2.0 is a pre-release.** The customized desktop has been exercised on a live machine; the complete installer has **not** been validated on a clean Pop!_OS installation. Static checks and isolated installer tests do not establish that a fresh-machine installation succeeds. Keep COSMIC as your recovery session and read the installation guide before running commands.
+**[Install · English](docs/en/INSTALL.md)** · **[Cài đặt · Tiếng Việt](docs/vi/INSTALL.md)** · [Shortcuts](docs/en/USAGE.md) · [AI agent guide](docs/agent/INSTALL.md)
 
-## What you get
+![Caelestia desktop on Pop!_OS with a translucent sidebar, workspace controls and desktop clock](assets/screenshots/desktop.png)
 
-- Caelestia sidebar, launcher, notifications, media controls, utilities, and a bar of running windows.
-- Tiling by default; an independent Float/Tiling preference for each workspace and a shortcut to float one window.
-- Per-window minimize, maximize/restore, and close controls; independent maximized floating windows.
-- An independent hyprpaper fallback preserves the selected wallpaper across shell replacements.
-- Fullscreen video restores the previous maximized state; volume OSD stays visible above video and shows its percentage.
-- A visual, most-recently-used Alt+Tab chooser. Hold Alt, cycle, then release to commit; the pointer stays put.
-- Foot terminal, retained COSMIC Files, your existing default browser, clipboard history, screenshots, and screen recording with speaker audio.
-- Optional Vietnamese Telex input through Fcitx5 + Unikey, HyprMod settings, and one selectable AI usage widget.
-- The complete modified Caelestia shell in this repository, native plugin source, recorder overrides, and scripts to build the required runtime.
+## Gallery
 
-This adds a session named **Hyprland (Caelestia Pop!_OS)** to COSMIC Greeter. COSMIC, `cosmic-greeter`, System76 power management, and distribution NVIDIA drivers stay installed. No automatic logout or reboot is performed.
+| Application launcher · Win+D | Visual window switcher · Alt+Tab |
+| --- | --- |
+| [![Application search in the translucent launcher](assets/screenshots/launcher.png)](assets/screenshots/launcher.png) | [![Visual Alt+Tab chooser with live previews of demonstration windows](assets/screenshots/window-switcher.png)](assets/screenshots/window-switcher.png) |
 
-## Start from COSMIC
+| AI Usage · hover to open | Search and choose one provider |
+| --- | --- |
+| [![AI Usage popup with session and weekly limits and reset times](assets/screenshots/ai-usage-detail.png)](assets/screenshots/ai-usage.png) | [![Searchable provider selector with Codex, OpenAI, Claude, Antigravity and GitHub Copilot](assets/screenshots/ai-providers-detail.png)](assets/screenshots/ai-providers.png) |
 
-Open Terminal in COSMIC. These commands download the repository and inspect the proposed installation; they do not install the desktop:
+| Screen recorder and quick controls | Wallpaper and style settings |
+| --- | --- |
+| [![Utilities panel with screen recorder, keep-awake and quick toggles](assets/screenshots/utilities-detail.png)](assets/screenshots/utilities.png) | [![Nexus settings for wallpaper, colours, transparency and dark theme](assets/screenshots/appearance.png)](assets/screenshots/appearance.png) |
+
+<details>
+<summary>Floating and tiled window layouts</summary>
+
+| Floating windows | Tiled windows |
+| --- | --- |
+| [![Overlapping floating windows with minimize, maximize and close buttons](assets/screenshots/floating.png)](assets/screenshots/floating.png) | [![Two tiled windows with titlebar controls and the running-app sidebar](assets/screenshots/tiling.png)](assets/screenshots/tiling.png) |
+
+Each workspace remembers its Float/Tiling choice. New workspaces start tiled; Win+V changes an individual window.
+
+</details>
+
+Real desktop captures with the included [CC0 wallpaper](assets/wallpaper.svg) and a Dracula palette. Terminal text and window selection are staged for demonstration. Installed apps, scale and optional widgets depend on your setup. Click a thumbnail for the full desktop capture. [Screenshot details](assets/README.md).
+
+## Features
+
+- **Choose your layout.** Tiling by default, with a saved Float/Tiling preference for each workspace. Float an individual window with Win+V.
+- **Familiar window controls.** Minimize, maximize/restore and close buttons, a running-app sidebar, and a visual Alt+Tab switcher that keeps your pointer in place.
+- **A coordinated shell.** Translucent panels, application search, notifications, media controls, desktop clock and animated wallpaper changes with automatic fallback recovery.
+- **Everyday tools included.** Foot, COSMIC Files, clipboard history, region screenshots and screen recording with speaker audio. Keep your existing default browser.
+- **Optional extras.** Vietnamese Telex with Fcitx5 + Unikey, HyprMod settings, and [AI Usage](docs/AI-USAGE.md) for one provider you select.
+- **Source included.** Modified QML/C++ shell, native window-action plugin, configuration and staged installer. Exact runtime revisions live in [pins.json](pins.json).
+
+## Install from COSMIC
+
+**0.2.0 is a pre-release.** The desktop has been used on an existing Pop!_OS machine; a complete clean-machine installation is still unverified. Keep COSMIC available as your recovery session. Read the [installation guide](docs/en/INSTALL.md) before making system changes.
+
+Start in a COSMIC terminal:
 
 ```bash
 sudo apt update
@@ -36,75 +65,70 @@ cd caelestia-pop-os
 ./setup.sh install --dry-run
 ```
 
-Read the output, check free disk space and GPU support, then follow the [full installation guide](docs/en/INSTALL.md). A basic installation is:
+After reviewing the plan and prerequisites:
 
 ```bash
 ./setup.sh install --yes
 ./setup.sh doctor
 ```
 
-Run the installer as your normal user; it requests `sudo` for system changes. Installation downloads and compiles software and can take substantial time. Default scale is **1.0**, build parallelism is **2 jobs**, and the disk budget includes **8 GiB build/cache + 4 GiB runtime + 8 GiB reserve** when these share a filesystem. `--scale 1.5` is an explicit choice tested with a 14-inch 2560×1600 panel, not a universal display setting.
+Run as your normal user; the installer requests `sudo` for system changes. It downloads and compiles the runtime, then adds **Hyprland (Caelestia Pop!_OS)** to the COSMIC Greeter session menu. Save your work and follow the guide to log into the new session.
 
-See [AI Usage setup and the single-provider selector](docs/AI-USAGE.md). The older `--with-codex` flag remains an alias.
+| Requirement | Default / support |
+| --- | --- |
+| Operating system | Pop!_OS 24.04 LTS, amd64 |
+| Disk budget | 20 GiB free when build, runtime and reserve share a filesystem: 8 + 4 + 8 GiB |
+| Build parallelism | 2 jobs |
+| Display scale | 1.0; choose a suitable value with `--scale` |
+| Graphics | Intel + NVIDIA laptop runtime exercised; other GPUs and multiple displays need testing |
 
-## Guides
+COSMIC, its greeter, System76 power management and distribution NVIDIA drivers stay installed. The installer does not automatically log you out or reboot.
 
-| Task | English | Tiếng Việt |
-| --- | --- | --- |
-| Install from COSMIC; select the login session | [Installation](docs/en/INSTALL.md) | [Cài đặt](docs/vi/INSTALL.md) |
-| Understand and build every component | [Manual installation](docs/en/MANUAL.md) | [Cài thủ công](docs/vi/MANUAL.md) |
-| Learn windows, launcher, shortcuts, recording | [Usage](docs/en/USAGE.md) | [Cách dùng và phím tắt](docs/vi/USAGE.md) |
-| Diagnose session, graphics, portals, fonts, input | [Troubleshooting](docs/en/TROUBLESHOOTING.md) | [Khắc phục lỗi](docs/vi/TROUBLESHOOTING.md) |
-| Return to COSMIC; update, rollback, uninstall | [Maintenance and recovery](docs/en/MAINTENANCE.md) | [Khôi phục và gỡ cài đặt](docs/vi/MAINTENANCE.md) |
-| Reclaim disk space while keeping a recovery desktop | [Optional cleanup](docs/en/COSMIC-CLEANUP.md) | [Dọn dung lượng tùy chọn](docs/vi/COSMIC-CLEANUP.md) |
+<details>
+<summary>Optional features and installer commands</summary>
 
-AI contributors should read [AGENTS.md](AGENTS.md) and [the agent documentation](docs/agent/INSTALL.md) before changing the system or installer.
+Choose only the options you need; this example enables all three extras:
 
-## Installer commands
+```bash
+./setup.sh install --yes --vietnamese --with-hyprmod --with-ai-usage --scale 1.5
+```
+
+`--with-codex` remains an alias for `--with-ai-usage`. AI Usage displays one selected provider; Codex account limits are separate from ordinary ChatGPT usage.
 
 | Command | Purpose |
 | --- | --- |
-| `./setup.sh preflight` | Inspect OS, architecture, hardware, memory and storage prerequisites |
-| `./setup.sh plan` | Show dependency/install plan |
-| `./setup.sh install --yes` | Run package, runtime, plugin and deployment stages |
-| `./setup.sh packages --yes` | Add the required package source and APT dependencies |
-| `./setup.sh runtime --yes` | Build/install private runtimes and desktop tools |
-| `./setup.sh plugins --yes` | Build the compatible compositor plugins |
-| `./setup.sh deploy --yes` | Back up and deploy user configuration and session integration |
-| `./setup.sh doctor` | Inspect the installed environment; run inside Hyprland for session checks |
-| `./setup.sh rollback --backup latest --yes` | Restore backed-up configuration; packages are retained |
-| `./setup.sh clean-cache --yes` | Remove installer build directories; preserve sources, downloads and receipts |
+| `preflight` / `plan` | Inspect prerequisites and proposed changes |
+| `install` | Run package, runtime, plugin and deployment stages |
+| `packages` / `runtime` / `plugins` / `deploy` | Run an individual stage |
+| `doctor` | Inspect the installed environment and current session |
+| `rollback --backup latest --yes` | Restore managed configuration; retain shared packages |
+| `clean-cache --yes` | Remove build directories; retain downloads, sources and receipts |
 
-All commands accept `--dry-run`. `preflight`, `plan`, and `doctor` support `--json`. Installation and stages accept `--scale`, `--vietnamese`, `--with-hyprmod`, `--with-ai-usage`, `--encoder auto|libx264|h264_nvenc`, `--jobs`, `--reserve-gib`, and `--cache-dir`. See [installation options](docs/en/INSTALL.md#choose-your-options).
+Prefix commands with `./setup.sh`. All accept `--dry-run`. See `./setup.sh --help` and the [full option reference](docs/en/INSTALL.md#choose-your-options).
 
-## Source and dependency design
+</details>
 
-```text
-shell/                      Complete modified Caelestia QML/C++ shell
-src/native-window-actions/  Native application window-action integration
-src/ai-usage/                Selected-provider usage backend and tests
-src/codex-usage/             Read-only Codex RPC client and tests
-src/cli-overrides/           Pop!_OS recording/Cava adaptations
-configs/                    Hyprland, shell and portal configuration
-scripts/                    Session helpers
-installer/                  Staged package/build/deployment logic
-setup.sh                    Public command-line entry point
-docs/en/  docs/vi/           Human guides
-docs/agent/                 Agent implementation and safety guidance
-```
+## Documentation
 
-The desktop uses a pinned **Hyprland 0.57.0** package from the third-party `ppa:cppiber/hyprland`, matching headers/plugins, **Quickshell 0.3.1**, and **Caelestia 2.5.0**. Private **Qt 6.11.2** lives under `/opt/qt6`; private **Wayland 1.26** lives under `/opt/caelestia-wayland`. This avoids replacing Pop!_OS's global Qt, Python, or Wayland libraries. Package operations refuse removals. The upstream `power-profiles-daemon` dependency is deliberately omitted because Pop!_OS uses `system76-power`; the shell's upstream power-profile UI is not promised to work.
+| Guide | English | Tiếng Việt |
+| --- | --- | --- |
+| From COSMIC to the first Hyprland login | [Installation](docs/en/INSTALL.md) | [Cài đặt](docs/vi/INSTALL.md) |
+| Build and install each component yourself | [Manual installation](docs/en/MANUAL.md) | [Cài thủ công](docs/vi/MANUAL.md) |
+| Windows, shortcuts, screenshots and recording | [Usage](docs/en/USAGE.md) | [Cách dùng](docs/vi/USAGE.md) |
+| Session, graphics, portals, fonts and input | [Troubleshooting](docs/en/TROUBLESHOOTING.md) | [Khắc phục lỗi](docs/vi/TROUBLESHOOTING.md) |
+| Updates, rollback, uninstall and COSMIC recovery | [Maintenance](docs/en/MAINTENANCE.md) | [Bảo trì và khôi phục](docs/vi/MAINTENANCE.md) |
+| Reclaim disk space | [Optional cleanup](docs/en/COSMIC-CLEANUP.md) | [Dọn dung lượng](docs/vi/COSMIC-CLEANUP.md) |
 
-See the [test evidence and remaining checks](docs/VALIDATION.md).
+For an AI-assisted installation, start with [AGENTS.md](AGENTS.md) and the [agent installation guide](docs/agent/INSTALL.md). Provider setup is covered in [AI Usage](docs/AI-USAGE.md).
 
-## Validation and limits
+## Contributing and support
 
-Observed live runtime: Intel graphics + RTX 4050, NVIDIA driver 595.104.02, NVIDIA graphics mode, internal display; floating/minimize/maximize/restore/close actions, switcher and recording workflows were exercised. This is one hardware configuration. Other GPUs, multiple displays, suspend/resume, and a complete clean-machine install require further testing. A different graphics mode may suit your machine better.
+Bug reports, documentation fixes and improvements are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for source layout, local checks and contribution guidelines. [Open an issue](https://github.com/AKiet280806/caelestia-pop-os/issues/new/choose) with reproduction steps and sanitized diagnostics.
 
-When reporting an issue, include your OS, GPU/driver, selected scale, installer stage, `./setup.sh doctor` output, and relevant session log excerpts. Remove tokens, account details, paths identifying private projects, and screenshots containing personal content.
+The runtime pins Hyprland 0.57.0 from `ppa:cppiber/hyprland`, Quickshell 0.3.1, Caelestia 2.5.0, private Qt 6.11.2 and private Wayland 1.26. Native plugins must match the compositor ABI. See the manual guide before changing dependencies. Fresh installs, suspend/resume, multiple displays and other GPU combinations remain areas for further validation.
 
-## Credits and licenses
+## Credits and license
 
-Built on [Caelestia shell](https://github.com/caelestia-dots/shell), [Caelestia CLI](https://github.com/caelestia-dots/cli), [Quickshell](https://quickshell.org/), and [Hyprland](https://hypr.land/). Inspired by [12errh/caelestia-ubuntu](https://github.com/12errh/caelestia-ubuntu).
+Built on [Caelestia shell](https://github.com/caelestia-dots/shell), [Caelestia CLI](https://github.com/caelestia-dots/cli), [Quickshell](https://quickshell.org/) and [Hyprland](https://hypr.land/). Inspired by [12errh/caelestia-ubuntu](https://github.com/12errh/caelestia-ubuntu).
 
-The exported shell base is `454f46da16ae75cc57f34adf48dea74db0fa5175`; local modifications are included in `shell/`. See [LICENSE](LICENSE), [shell/LICENSE](shell/LICENSE), and [licenses/](licenses/) for redistribution terms and attribution. Components retain their own licenses. This is a community project, not an official System76 or upstream Caelestia release.
+Distributed under [GPL-3.0-or-later](LICENSE), with component licenses and attribution in [NOTICE](NOTICE), [shell/LICENSE](shell/LICENSE) and [licenses/](licenses/). The included wallpaper is CC0. This is a community project, independent of System76 and upstream Caelestia.

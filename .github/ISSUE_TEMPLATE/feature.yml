@@ -1,0 +1,17 @@
+name: Feature request
+description: Suggest an improvement. English and Vietnamese are welcome.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would this help you do?
+      description: Describe the desktop workflow or limitation you want to improve.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested behavior
+      description: Explain how you would use it. Visual examples and alternatives are welcome.
+    validations:
+      required: true

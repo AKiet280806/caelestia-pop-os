@@ -8,7 +8,9 @@ import tempfile
 
 root = Path(__file__).resolve().parents[1]
 errors = []
-for document in [root / 'README.md', root / 'AGENTS.md', *sorted((root / 'docs').rglob('*.md'))]:
+for document in [*sorted(root.glob('*.md')), *sorted((root / 'docs').rglob('*.md')),
+                 *sorted((root / 'assets').rglob('*.md')), root / 'shell/README.md',
+                 *sorted((root / '.github').rglob('*.md'))]:
     for target in re.findall(r'\]\(([^)]+)\)', document.read_text()):
         if target.startswith(('http:', 'https:', '#', 'mailto:')):
             continue

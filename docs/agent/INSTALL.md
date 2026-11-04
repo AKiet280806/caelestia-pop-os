@@ -100,3 +100,21 @@ Tell the human that installation is ready for a session test and include any unr
 Do not restart the display manager, log out, reboot, or type a password for them. Keep COSMIC available in the same selector as the recovery session. While login is pending, continue independent documentation, static validation, or evidence review. After the human reports successful login, continue with [VERIFY.md](VERIFY.md); the session is not verified merely because the greeter listed it.
 
 See [AI Usage](../AI-USAGE.md) for provider selection and setup.
+
+## Ask an AI agent to install
+
+Provide the checkout path and your chosen options with this prompt:
+
+```text
+Install this checkout of caelestia-pop-os on Pop!_OS 24.04 amd64, starting
+from COSMIC. Read AGENTS.md and docs/agent/INSTALL.md. Preserve COSMIC,
+System76 integration and the current session. Inspect preflight, pins,
+APT simulation and disk budgets, then perform the authorized setup.
+Use documented backups. Do not log me out, reboot or change GPU mode.
+Explain how to select the new session, then follow docs/agent/VERIFY.md
+once I have logged in. Report failed and untested cases honestly.
+Checkout: [local path]
+Options: [scale, Vietnamese input, HyprMod, AI Usage, encoder]
+```
+
+If another agent continues, pass the revision, selected options, last successful stage, first failing command and private backup identifier directly. Keep machine-specific handoff records outside this repository.
