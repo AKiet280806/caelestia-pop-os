@@ -16,7 +16,7 @@ Each feature has one screenshot in `screenshots/`, linked from the main README:
 | `performance.png` | Live CPU, GPU, memory, storage, network and battery readings |
 | `weather.png` | Current conditions and seven-day forecast for London |
 | `launcher.png` | Application search |
-| `clipboard.png` | Clipboard search with an isolated demo history |
+| `clipboard.png` | Clipboard thumbnails and image preview with an isolated demo history |
 | `window-switcher.png` | Visual Alt+Tab with disposable demonstration windows |
 | `ai-usage.png` | Selected-provider quota and reset times |
 | `notifications.png` | Expanded group of demonstration notifications |

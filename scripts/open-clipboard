@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+set -euo pipefail
+clipboard_root="${XDG_DATA_HOME:-$HOME/.local/share}/caelestia-pop-os/clipboard"
+export CAELESTIA_CLIPBOARD_ROOT="$clipboard_root"
+if qs -p "$clipboard_root" ipc call clipboard toggle >/dev/null 2>&1; then exit 0; fi
+[[ -d $clipboard_root ]] || { echo 'Caelestia clipboard is not installed.' >&2; exit 1; }
+exec 9>"${XDG_RUNTIME_DIR:?A graphical user session is required}/caelestia-clipboard.lock"
+flock -n 9 || exit 0
+if qs -p "$clipboard_root" ipc call clipboard toggle >/dev/null 2>&1; then exit 0; fi
+CAELESTIA_CLIPBOARD_SCREEN="$(hyprctl -j activeworkspace 2>/dev/null | python3 -c 'import json,sys; print(json.load(sys.stdin).get("monitor", ""))' 2>/dev/null || true)"
+export CAELESTIA_CLIPBOARD_SCREEN
+exec qs --no-duplicate --daemonize -p "$clipboard_root"

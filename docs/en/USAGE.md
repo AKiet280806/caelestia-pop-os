@@ -56,7 +56,7 @@ Hold Alt and press Tab to open the chooser. It includes windows on the current w
 
 Win+D opens application search. The hover launcher can close when the pointer leaves until you start typing; typing keeps your search active. Use the keyboard shortcut if hover behavior is inconvenient.
 
-Win+Shift+V opens clipboard history. Select an item and press Enter, then Ctrl+V in the target app. Text and images are collected by session-bound clipboard watchers; content copied before these start may not appear. Clipboard history may contain private copied text. Inspect before sharing logs or screenshots, and use `cliphist wipe` if you deliberately want to clear the whole history.
+Win+Shift+V opens the themed Clipboard popup. Search, use ↑/↓ to choose an item, then Enter to copy it; Ctrl+V pastes in the target app. Ctrl+1…4 switches All/Text/Images/Links, and Esc or clicking outside closes the popup. Images show real thumbnails. Click a card to inspect its larger preview; Enter, double-click, the copy icon or **Copy item** copies the selection. Image proportions and the original clipboard payload are preserved. Previews are stored privately in the session runtime directory and removed when the popup closes. The existing cliphist database stays in use. Text and images are collected by session-bound clipboard watchers; content copied before these start may not appear. Clipboard history may contain private copied text. Inspect before sharing logs or screenshots, and use `cliphist wipe` if you deliberately want to clear the whole history.
 
 ## Screenshots and recording
 

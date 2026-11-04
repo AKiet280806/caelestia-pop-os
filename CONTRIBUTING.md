@@ -14,6 +14,7 @@ Review everything before sharing. Remove tokens, account details, private paths,
 | --- | --- |
 | `shell/` | Modified Caelestia QML shell and C++ modules |
 | `src/native-window-actions/` | Hyprland window-action plugin |
+| `src/clipboard/` | Standalone themed clipboard popup and private cliphist bridge |
 | `src/wallpaper-fallback/` | Independent wallpaper recovery controller |
 | `src/ai-usage/`, `src/codex-usage/` | Selected-provider usage and read-only Codex integration |
 | `src/cli-overrides/` | Recording and terminal Cava adaptations |

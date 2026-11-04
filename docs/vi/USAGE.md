@@ -56,7 +56,7 @@ Giữ Alt, bấm Tab để hiện bảng chọn. Danh sách gồm cửa sổ c�
 
 Win+D mở tìm ứng dụng. Launcher mở bằng hover có thể đóng khi chuột rời vùng trước khi bạn gõ; khi đã nhập tìm kiếm thì nó giữ thao tác nhập. Dùng Win+D nếu không thích mở bằng hover.
 
-Win+Shift+V mở lịch sử clipboard. Chọn mục, Enter rồi Ctrl+V trong app đích. Watcher văn bản/ảnh chỉ chạy trong phiên; nội dung copy trước khi watcher khởi động có thể không xuất hiện. Clipboard có thể chứa dữ liệu riêng tư; kiểm tra trước khi chụp màn hình/chia sẻ. Nếu chủ động muốn xóa toàn bộ lịch sử, dùng `cliphist wipe`.
+Win+Shift+V mở popup Clipboard đồng bộ màu với Caelestia. Gõ để tìm, dùng ↑/↓ chọn mục, Enter để chép lại rồi Ctrl+V trong app đích. Ctrl+1…4 đổi bộ lọc All/Text/Images/Links; Esc hoặc click ra ngoài để đóng. Ảnh có thumbnail thật. Click thẻ để xem ảnh lớn hơn; Enter, click đúp, icon copy hoặc **Copy item** để chép mục đã chọn. Ảnh giữ đúng tỉ lệ và giữ nguyên dữ liệu gốc khi chép. Preview được lưu riêng trong thư mục runtime của phiên và xóa khi đóng popup. Popup tiếp tục dùng lịch sử cliphist hiện có. Watcher văn bản/ảnh chỉ chạy trong phiên; nội dung copy trước khi watcher khởi động có thể không xuất hiện. Clipboard có thể chứa dữ liệu riêng tư; kiểm tra trước khi chụp màn hình/chia sẻ. Nếu chủ động muốn xóa toàn bộ lịch sử, dùng `cliphist wipe`.
 
 ## Chụp và quay màn hình
 

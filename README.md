@@ -25,7 +25,7 @@ One screenshot per feature. Click any image for full resolution.
 
 | Application launcher · Win+D | Clipboard history · Win+Shift+V |
 | --- | --- |
-| [<img src="assets/screenshots/launcher.png" alt="Application search in the translucent launcher" width="400">](assets/screenshots/launcher.png) | [<img src="assets/screenshots/clipboard.png" alt="Clipboard search with isolated demonstration entries" width="400">](assets/screenshots/clipboard.png) |
+| [<img src="assets/screenshots/launcher.png" alt="Application search in the translucent launcher" width="400">](assets/screenshots/launcher.png) | [<img src="assets/screenshots/clipboard.png" alt="Clipboard with real image thumbnails and a larger preview" width="400">](assets/screenshots/clipboard.png) |
 
 | Visual window switcher · Alt+Tab | AI Usage · hover to open |
 | --- | --- |
@@ -54,7 +54,7 @@ Real desktop captures with the included [CC0 wallpaper](assets/wallpaper.svg) an
 - **Choose your layout.** Tiling by default, with a saved Float/Tiling preference for each workspace. Float an individual window with Win+V.
 - **Familiar window controls.** Minimize, maximize/restore and close buttons, a running-app sidebar, and a visual Alt+Tab switcher that keeps your pointer in place.
 - **A coordinated shell.** Translucent panels, application search, notifications, media controls, desktop clock and animated wallpaper changes with automatic fallback recovery.
-- **Everyday tools included.** Foot, COSMIC Files, clipboard history, region screenshots and screen recording with speaker audio. Keep your existing default browser.
+- **Everyday tools included.** Foot, COSMIC Files, a themed clipboard popup with image previews, search and type filters, region screenshots and screen recording with speaker audio. Keep your existing default browser.
 - **Optional extras.** Vietnamese Telex with Fcitx5 + Unikey, HyprMod settings, and [AI Usage](docs/AI-USAGE.md) for one provider you select.
 - **Source included.** Modified QML/C++ shell, native window-action plugin, configuration and staged installer. Exact runtime revisions live in [pins.json](pins.json).
 

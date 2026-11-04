@@ -37,7 +37,7 @@ libxml2-dev libcli11-dev libvulkan-dev libxcb1-dev libglib2.0-dev libpolkit-agen
 libpolkit-gobject-1-dev libjemalloc-dev libpam0g-dev libgtk-3-dev libgtk-4-dev libadwaita-1-dev
 libgirepository-2.0-dev gobject-introspection python3-venv python3-dev pipx lua5.4 liblua5.4-dev
 hyprland-plugin-deps hyprland-guiutils hypridle hyprlock hyprpaper xdg-desktop-portal-hyprland xdg-desktop-portal-gtk network-manager dbus
-foot fish fuzzel cliphist wl-clipboard grim slurp ffmpeg wf-recorder btop brightnessctl brightness-udev
+foot fish fuzzel cliphist wl-clipboard python3-pil grim slurp ffmpeg wf-recorder btop brightnessctl brightness-udev
 ddcutil libxml2-utils pavucontrol playerctl policykit-1-gnome lm-sensors qalc
 libjson-c-dev libjpeg-dev libpng-dev libgtk-layer-shell-dev scdoc flex bison libegl1-mesa-dev
 ripgrep xwayland xdg-utils libnotify-bin pipewire-pulse wireplumber pciutils psmisc procps util-linux dbus-user-session xdg-user-dirs fonts-noto-color-emoji
@@ -457,12 +457,13 @@ def targets(paths):
         'portal': paths.config / 'xdg-desktop-portal/hyprland-portals.conf',
         'wallpaper': paths.data / 'wallpapers/wallpaper.png',
         'wallpaper-backend': paths.data / 'wallpaper-fallback',
+        'clipboard-ui': paths.data / 'clipboard',
         'codex-backend': paths.data / 'codex-usage',
         'ai-backend': paths.data / 'ai-usage',
         'fcitx-profile': paths.config / 'fcitx5/profile',
         'fcitx-unikey': paths.config / 'fcitx5/conf/unikey.conf',
     }
-    for name in ('start-caelestia-session', 'start-caelestia-services', 'start-fcitx-unikey', 'caelestia-open-browser', 'caelestia-open-files'):
+    for name in ('start-caelestia-session', 'start-caelestia-services', 'start-fcitx-unikey', 'caelestia-open-browser', 'caelestia-open-files', 'caelestia-clipboard'):
         result['helper-' + name] = paths.home / '.local/bin' / name
     for name in ('caelestia-shell.service', 'caelestia-wallpaper.service', 'caelestia-clipboard@.service', 'caelestia-codex-usage.service'):
         result['unit-' + name] = paths.config / 'systemd/user' / name
@@ -526,8 +527,10 @@ def render_templates(args, paths, staging):
     add('portal', ROOT / 'configs/xdg-desktop-portal/hyprland-portals.conf')
     add('wallpaper', ROOT / 'assets/wallpaper.png')
     add('wallpaper-backend', ROOT / 'src/wallpaper-fallback')
+    add('clipboard-ui', ROOT / 'src/clipboard')
     helpers = {'start-caelestia-session': 'start-caelestia-session', 'start-caelestia-services': 'start-caelestia-services',
-               'start-fcitx-unikey': 'start-fcitx-unikey', 'caelestia-open-browser': 'open-browser', 'caelestia-open-files': 'open-files'}
+               'start-fcitx-unikey': 'start-fcitx-unikey', 'caelestia-open-browser': 'open-browser', 'caelestia-open-files': 'open-files',
+               'caelestia-clipboard': 'open-clipboard'}
     for target, source in helpers.items():
         if target == 'start-fcitx-unikey' and not args.vietnamese:
             continue

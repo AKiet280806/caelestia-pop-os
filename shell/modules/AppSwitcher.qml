@@ -83,7 +83,7 @@ Scope {
                 width: window.columns * window.cardWidth + (window.columns - 1) * 12 + 40
                 height: Math.min(window.height - 70, window.gridHeight + 112)
                 radius: Tokens.rounding.extraLarge
-                color: Colours.palette.m3surfaceContainer
+                color: Colours.tPalette.m3surfaceContainer
                 border.width: 1
                 border.color: Colours.palette.m3outlineVariant
                 // Consume panel background clicks; only the outside area cancels.
@@ -143,8 +143,8 @@ Scope {
                                     width: window.cardWidth
                                     height: window.cardHeight
                                     radius: Tokens.rounding.medium
-                                    color: selected ? Colours.palette.m3secondaryContainer
-                                        : mouse.containsMouse ? Colours.palette.m3surfaceContainerHighest : Colours.palette.m3surfaceContainerHigh
+                                    color: selected ? Colours.tPalette.m3secondaryContainer
+                                        : mouse.containsMouse ? Colours.tPalette.m3surfaceContainerHighest : Colours.tPalette.m3surfaceContainerHigh
                                     border.width: selected ? 3 : 1
                                     border.color: selected ? Colours.palette.m3primary : Colours.palette.m3outlineVariant
                                     Accessible.role: Accessible.Button

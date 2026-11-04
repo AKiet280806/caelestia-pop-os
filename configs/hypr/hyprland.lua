@@ -56,7 +56,7 @@ hl.bind("SUPER + H", hl.dsp.exec_cmd("qs -c caelestia ipc call windowControls mi
 hl.bind("SUPER + SHIFT + H", hl.dsp.exec_cmd("qs -c caelestia ipc call windowControls restore"))
 hl.bind("Print", hl.dsp.exec_cmd("caelestia screenshot"))
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("caelestia screenshot -r"))
-hl.bind("SUPER + SHIFT + V", hl.dsp.exec_cmd("caelestia clipboard"))
+hl.bind("SUPER + SHIFT + V", hl.dsp.exec_cmd("caelestia-clipboard"))
 
 require("caelestia-windows")
 hl.plugin.load(data .. "/hypr/plugins/native-minimize-0.57.0.so")
