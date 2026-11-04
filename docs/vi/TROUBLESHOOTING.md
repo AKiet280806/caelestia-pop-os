@@ -122,3 +122,7 @@ Kiểm tra nhà cung cấp đang chọn và nguồn đăng nhập theo [AI Usage
 Xem [AI Usage](../AI-USAGE.md) để chọn một nhà cung cấp và cấu hình nguồn usage.
 
 Service giữ tên cũ `caelestia-codex-usage.service` để tương thích; xem [AI Usage](../AI-USAGE.md) khi thiếu đăng nhập hoặc nguồn usage không được hỗ trợ.
+
+## Báo thiếu hyprland-guiutils khi đăng nhập
+
+`hyprland-guiutils` cung cấp hộp thoại Hyprland, gồm hộp thoại xin quyền, và là gói runtime bắt buộc của bộ cài. Kiểm tra `command -v hyprland-dialog` và `apt-cache policy hyprland-guiutils`. Nếu đã cài bằng phiên bản cũ: mô phỏng `apt-get -s --no-install-recommends install hyprland-guiutils`, bảo đảm không gỡ gói hoặc đổi bản compositor đã ghim, rồi cài bằng `sudo apt-get install --no-remove --no-install-recommends hyprland-guiutils`. Không tắt kiểm tra GUI utilities để che cảnh báo. Xác nhận cảnh báo khởi động trong lần đăng nhập kế tiếp; không khởi động lại compositor khi đang làm việc.

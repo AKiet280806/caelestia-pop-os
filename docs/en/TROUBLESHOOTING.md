@@ -122,3 +122,7 @@ First verify the selected provider in the popup and its authentication/source re
 For the single-provider AI Usage selector and account setup, see [AI Usage](../AI-USAGE.md).
 
 The compatibility service name is `caelestia-codex-usage.service`; generic cache errors and supported-source limits are explained in [AI Usage](../AI-USAGE.md).
+
+## Missing hyprland-guiutils at login
+
+`hyprland-guiutils` provides Hyprland dialogs, including permission prompts. It is a required runtime package in this installer. Check `command -v hyprland-dialog` and `apt-cache policy hyprland-guiutils`. For an older installation, simulate `apt-get -s --no-install-recommends install hyprland-guiutils`, check that it removes nothing and retains the pinned compositor, then install with `sudo apt-get install --no-remove --no-install-recommends hyprland-guiutils`. Do not hide the warning by disabling the GUI-utilities check. A new login is the final check for a startup-only warning; do not restart the compositor during active work.

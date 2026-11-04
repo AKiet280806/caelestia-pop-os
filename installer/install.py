@@ -36,7 +36,7 @@ libfftw3-dev libinih-dev libiniparser-dev autoconf automake libtool meson libffi
 libxml2-dev libcli11-dev libvulkan-dev libxcb1-dev libglib2.0-dev libpolkit-agent-1-dev
 libpolkit-gobject-1-dev libjemalloc-dev libpam0g-dev libgtk-3-dev libgtk-4-dev libadwaita-1-dev
 libgirepository-2.0-dev gobject-introspection python3-venv python3-dev pipx lua5.4 liblua5.4-dev
-hyprland-plugin-deps hypridle hyprlock hyprpaper xdg-desktop-portal-hyprland xdg-desktop-portal-gtk network-manager dbus
+hyprland-plugin-deps hyprland-guiutils hypridle hyprlock hyprpaper xdg-desktop-portal-hyprland xdg-desktop-portal-gtk network-manager dbus
 foot fish fuzzel cliphist wl-clipboard grim slurp ffmpeg wf-recorder btop brightnessctl brightness-udev
 ddcutil libxml2-utils pavucontrol playerctl policykit-1-gnome lm-sensors qalc
 libjson-c-dev libjpeg-dev libpng-dev libgtk-layer-shell-dev scdoc flex bison libegl1-mesa-dev
@@ -656,6 +656,7 @@ def doctor(args, paths):
                         ('hyprbars', paths.data_root / 'hypr/plugins/hyprbars-0.57.0.so'),
                         ('native-actions', paths.data_root / 'hypr/plugins/native-minimize-0.57.0.so')]:
         check(label, path.is_file(), str(path))
+    check('hyprland-dialog', shutil.which('hyprland-dialog') is not None, 'hyprland-guiutils supplies compositor dialogs and permission prompts.')
     qs = discover(['/usr/local/bin/qs', '--version'])
     check('quickshell-version', qs and '0.3.1' in qs, qs)
     pending = []
