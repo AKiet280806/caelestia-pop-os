@@ -27,6 +27,7 @@ Scope {
     property string lockMessage
     property int state
     property string buffer
+    property bool preparingForSleep: false
 
     signal flashMsg
 
@@ -139,10 +140,20 @@ Scope {
         availCommand: ["sh", "-c", "command -v howdy"]
         enabled: GlobalConfig.lock.enableHowdy
         maxTries: GlobalConfig.lock.maxHowdyTries
+        onAvailProcExited: {
+            if (canAttempt && !active && !root.preparingForSleep && !passwd.active && root.buffer.length === 0)
+                start();
+        }
     }
 
     Connections {
+        function onAboutToSleep(): void {
+            root.preparingForSleep = true;
+            howdy.abort();
+        }
+
         function onResumed(): void {
+            root.preparingForSleep = false;
             if (howdy.canAttempt && !howdy.active && GlobalConfig.lock.triggerHowdyOnWake)
                 howdy.start();
         }
