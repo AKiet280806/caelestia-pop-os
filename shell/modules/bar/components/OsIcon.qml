@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import Caelestia.Config
 import qs.components
 import qs.components.effects
@@ -15,8 +16,7 @@ Item {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            const screenState = ShellState.forActive();
-            screenState.launcher = !screenState.launcher;
+            Quickshell.execDetached(["qs", "-c", "caelestia", "ipc", "call", "shortcutGuide", "toggle"]);
         }
     }
 

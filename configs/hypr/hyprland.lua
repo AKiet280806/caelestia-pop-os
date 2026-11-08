@@ -55,7 +55,7 @@ hl.bind("ALT + F10", function() caelestia_toggle_maximize() end)
 hl.bind("SUPER + H", hl.dsp.exec_cmd("qs -c caelestia ipc call windowControls minimize"))
 hl.bind("SUPER + SHIFT + H", hl.dsp.exec_cmd("qs -c caelestia ipc call windowControls restore"))
 hl.bind("Print", hl.dsp.exec_cmd("caelestia screenshot"))
-hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("caelestia screenshot -r"))
+hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("qs -c caelestia ipc call picker openClip"))
 hl.bind("SUPER + SHIFT + V", hl.dsp.exec_cmd("caelestia-clipboard"))
 
 require("caelestia-windows")
@@ -75,3 +75,7 @@ if hl.plugin.hyprbars then
 end
 require("hyprland-gui")
 require("caelestia-shortcuts")
+
+-- Toggle automatic edge/bar popups.
+hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd("qs -c caelestia ipc call popupHover toggle"))
+hl.bind("SUPER + SHIFT + T", hl.dsp.exec_cmd("qs -c caelestia ipc call windowLayout toggle"))

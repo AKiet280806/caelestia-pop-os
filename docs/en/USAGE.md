@@ -23,6 +23,8 @@
 | Win+M | Minimize non-pinned windows in current workspace |
 | Win+Shift+M | Restore the batch minimized with Win+M |
 | Win+V | Toggle focused window between floating and tiled |
+| Win+Shift+T | Toggle Float/Tiling for this workspace |
+| Win+Shift+P | Toggle automatic edge/bar popups |
 | Win+Shift+V | Open clipboard history |
 | Win+arrow keys | Focus window in the chosen direction |
 | Win+left mouse drag | Move window |
@@ -33,7 +35,7 @@
 | Win+L | Lock screen; test password unlock before relying on it |
 | Ctrl+Shift+Esc | Open btop in a terminal |
 | Print Screen | Capture full screen to clipboard; use Save in notification to save a file |
-| Win+Shift+S | Select screenshot region; Esc cancels |
+| Win+Shift+S | Select a region and copy it to the clipboard; Esc cancels |
 | Win+Ctrl+Shift+Q | Log out of Hyprland; save work first |
 
 There is no duplicate Win+R launcher binding. Ctrl+Tab and Ctrl+Shift+Tab remain application-specific tab shortcuts. Laptop media and brightness keys are configured where the hardware exposes them; three-finger horizontal workspace gestures depend on touchpad support.
@@ -54,13 +56,17 @@ Hold Alt and press Tab to open the chooser. It includes windows on the current w
 
 ## Launcher and clipboard
 
+Click the top-left logo for the keyboard shortcut guide. The Hover button below Float/Tiling remembers whether popups open on hover. The default is on.
+
+In Click mode, click a trigger to open its popup and move outside to close it. A launcher search stays open after you start typing.
+
 Win+D opens application search. The hover launcher can close when the pointer leaves until you start typing; typing keeps your search active. Use the keyboard shortcut if hover behavior is inconvenient.
 
 Win+Shift+V opens the themed Clipboard popup. Search, use ↑/↓ to choose an item, then Enter to copy it; Ctrl+V pastes in the target app. Ctrl+1…4 switches All/Text/Images/Links, and Esc or clicking outside closes the popup. Images show real thumbnails. Click a card to inspect its larger preview; Enter, double-click, the copy icon or **Copy item** copies the selection. Image proportions and the original clipboard payload are preserved. Previews are stored privately in the session runtime directory and removed when the popup closes. The existing cliphist database stays in use. Text and images are collected by session-bound clipboard watchers; content copied before these start may not appear. Clipboard history may contain private copied text. Inspect before sharing logs or screenshots, and use `cliphist wipe` if you deliberately want to clear the whole history.
 
 ## Screenshots and recording
 
-Print Screen captures the display; Win+Shift+S lets you draw a region. Esc cancels region selection. Swappy supplies screenshot annotation/editing where invoked by the screenshot flow.
+Print Screen captures the display; Win+Shift+S copies the selected region to the clipboard. Esc cancels region selection. Swappy supplies screenshot annotation/editing where invoked by the screenshot flow.
 
 Open **Utilities → Screen recorder / Record screen**. Choose full display or a region, with or without sound. Drag to select a region. Press **Stop** to finish and wait for the saved notification. Files go to `~/Videos/Recordings`. Audio means the current output's **speaker monitor**, encoded as AAC, not automatic microphone recording. Only one recording should run at a time. Pause is disabled because the wf-recorder backend does not support it.
 

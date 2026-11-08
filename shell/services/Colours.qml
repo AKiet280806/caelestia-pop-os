@@ -84,7 +84,7 @@ Singleton {
 
     function reloadHyprRules(): void {
         const rules = [];
-        for (const namespace of ["caelestia-drawers", "caelestia-app-switcher", "caelestia-clipboard"]) {
+        for (const namespace of ["caelestia-drawers", "caelestia-app-switcher", "caelestia-clipboard", "caelestia-shortcut-guide"]) {
             let rule, trEnabled;
             if (Hypr.usingLua) {
                 rule = `eval hl.layer_rule({ match = { namespace = "${namespace}" }, %1 = %2 })`;

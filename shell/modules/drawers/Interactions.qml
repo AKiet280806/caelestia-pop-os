@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell
+import Quickshell.Io
 import Caelestia.Config
 import qs.components
+import qs.services
 import qs.components.controls
 import qs.modules.bar as Bar
 import qs.modules.bar.popouts as BarPopouts
@@ -23,6 +25,57 @@ CustomMouseArea {
     property bool osdShortcutActive
     property bool launcherOpenedByHover
     property bool utilitiesShortcutActive
+
+    // Pointer events stop when the cursor leaves this layer surface. Sample the
+    // compositor cursor only while a click-opened popup is visible.
+    function closeClickPopups(x: real, y: real): void {
+        if (PopupHover.enabled || pressed || popouts.isDetached)
+            return;
+        if (!inTopPanel(panels.dashboard, x, y))
+            screenState.dashboard = false;
+        if (!inBottomPanel(panels.utilities, x, y, true))
+            screenState.utilities = false;
+        if (!inRightPanel(panels.osdWrapper, x, y)) {
+            screenState.osd = false;
+            panels.osd.hovered = false;
+        }
+        if (!inRightPanel(panels.sidebar, x, y))
+            screenState.sidebar = false;
+        if (!inRightPanel(panels.sessionWrapper, x, y))
+            screenState.session = false;
+        if (!panels.launcher.searchEngaged && !inBottomPanel(panels.launcher, x, y))
+            screenState.launcher = false;
+        if (popouts.currentName !== "aiusage" && !(popouts.current?.interactionActive ?? false)
+            && x >= bar.implicitWidth && !inLeftPanel(panels.popoutsWrapper, x, y)) {
+            popouts.hasCurrent = false;
+            bar.closeTray();
+        }
+    }
+
+    Timer {
+        interval: 250
+        repeat: true
+        running: !PopupHover.enabled && !root.popouts.isDetached && (root.screenState.dashboard
+            || root.screenState.utilities || root.screenState.osd || root.screenState.sidebar
+            || root.screenState.session || (root.screenState.launcher && !root.panels.launcher.searchEngaged)
+            || (root.popouts.hasCurrent && root.popouts.currentName !== "aiusage"))
+        onTriggered: if (!clickCursor.running) clickCursor.running = true
+    }
+
+    Process {
+        id: clickCursor
+        command: ["hyprctl", "-j", "cursorpos"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    const cursor = JSON.parse(text);
+                    if (typeof cursor.x === "number" && typeof cursor.y === "number")
+                        root.closeClickPopups(cursor.x - root.screen.x, cursor.y - root.screen.y);
+                } catch (error) {}
+            }
+        }
+        stderr: StdioCollector {}
+    }
 
     Timer {
         id: launcherCloseTimer
@@ -91,6 +144,23 @@ CustomMouseArea {
     hoverEnabled: true
 
     onPressed: event => dragStart = Qt.point(event.x, event.y)
+    onClicked: event => {
+        if (PopupHover.enabled || fullscreen || popouts.isDetached)
+            return;
+        if (event.x < bar.implicitWidth) {
+            bar.checkPopout(event.y);
+        } else if (inTopPanel(panels.dashboard, event.x, event.y)) {
+            dashboardShortcutActive = true;
+            screenState.dashboard = !screenState.dashboard;
+        } else if (inBottomPanel(panels.utilities, event.x, event.y, true)) {
+            utilitiesShortcutActive = true;
+            screenState.utilities = !screenState.utilities;
+        } else if (inRightPanel(panels.osdWrapper, event.x, event.y)) {
+            osdShortcutActive = true;
+            screenState.osd = !screenState.osd;
+        }
+    }
+
     onContainsMouseChanged: {
         if (!containsMouse) {
             if (launcherOpenedByHover)
@@ -122,6 +192,8 @@ CustomMouseArea {
     }
 
     onPositionChanged: event => {
+        if (!PopupHover.enabled)
+            return;
         if (popouts.isDetached)
             return;
 

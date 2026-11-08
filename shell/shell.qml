@@ -35,6 +35,7 @@ ShellRoot {
     }
 
     AppSwitcher {}
+    ShortcutGuide {}
     Shortcuts {}
     BatteryMonitor {}
     IdleMonitors {

@@ -23,6 +23,8 @@
 | Win+M | Thu nhỏ các cửa sổ không ghim của workspace hiện tại |
 | Win+Shift+M | Mở lại nhóm vừa thu nhỏ bằng Win+M |
 | Win+V | Chuyển một cửa sổ giữa dạng nổi và xếp ô |
+| Win+Shift+T | Đổi Float/Tiling cho workspace hiện tại |
+| Win+Shift+P | Bật/tắt popup tự mở ở viền và thanh bên |
 | Win+Shift+V | Mở lịch sử clipboard |
 | Win+các phím mũi tên | Chọn cửa sổ theo hướng tương ứng |
 | Win+kéo chuột trái | Di chuyển cửa sổ |
@@ -33,7 +35,7 @@
 | Win+L | Khóa màn hình; cần thử mở khóa bằng mật khẩu trước |
 | Ctrl+Shift+Esc | Mở btop để xem tài nguyên/tiến trình |
 | Print Screen | Chụp toàn màn hình vào clipboard; bấm Save trong thông báo để lưu |
-| Win+Shift+S | Chọn vùng chụp; Esc hủy |
+| Win+Shift+S | Chụp vùng và tự copy ảnh vào clipboard; Esc hủy |
 | Win+Ctrl+Shift+Q | Đăng xuất Hyprland; lưu công việc trước |
 
 Không thêm Win+R trùng launcher. Ctrl+Tab/Ctrl+Shift+Tab vẫn do từng app dùng để chuyển tab. Phím âm lượng/độ sáng laptop được gán khi thiết bị có hỗ trợ; vuốt ngang ba ngón để đổi workspace phụ thuộc touchpad.
@@ -54,13 +56,17 @@ Giữ Alt, bấm Tab để hiện bảng chọn. Danh sách gồm cửa sổ c�
 
 ## Launcher và clipboard
 
+Bấm logo góc trên trái để mở bảng phím tắt. Nút Hover dưới Float/Tiling nhớ lựa chọn tự mở popup khi rê chuột, mặc định bật.
+
+Ở chế độ Click, bấm để mở popup và rê ra ngoài để tự đóng. Launcher giữ mở khi đã bắt đầu gõ tìm kiếm.
+
 Win+D mở tìm ứng dụng. Launcher mở bằng hover có thể đóng khi chuột rời vùng trước khi bạn gõ; khi đã nhập tìm kiếm thì nó giữ thao tác nhập. Dùng Win+D nếu không thích mở bằng hover.
 
 Win+Shift+V mở popup Clipboard đồng bộ màu với Caelestia. Gõ để tìm, dùng ↑/↓ chọn mục, Enter để chép lại rồi Ctrl+V trong app đích. Ctrl+1…4 đổi bộ lọc All/Text/Images/Links; Esc hoặc click ra ngoài để đóng. Ảnh có thumbnail thật. Click thẻ để xem ảnh lớn hơn; Enter, click đúp, icon copy hoặc **Copy item** để chép mục đã chọn. Ảnh giữ đúng tỉ lệ và giữ nguyên dữ liệu gốc khi chép. Preview được lưu riêng trong thư mục runtime của phiên và xóa khi đóng popup. Popup tiếp tục dùng lịch sử cliphist hiện có. Watcher văn bản/ảnh chỉ chạy trong phiên; nội dung copy trước khi watcher khởi động có thể không xuất hiện. Clipboard có thể chứa dữ liệu riêng tư; kiểm tra trước khi chụp màn hình/chia sẻ. Nếu chủ động muốn xóa toàn bộ lịch sử, dùng `cliphist wipe`.
 
 ## Chụp và quay màn hình
 
-Print Screen chụp màn hình; Win+Shift+S chọn vùng. Esc hủy khoanh vùng. Swappy cung cấp chỉnh sửa/ghi chú ảnh trong luồng chụp có gọi trình chỉnh sửa.
+Print Screen chụp màn hình; Win+Shift+S tự copy ảnh vùng đã chọn vào clipboard. Esc hủy khoanh vùng. Swappy cung cấp chỉnh sửa/ghi chú ảnh trong luồng chụp có gọi trình chỉnh sửa.
 
 Mở **Utilities → Screen recorder / Record screen**. Chọn toàn màn hình hoặc một vùng, có/không âm thanh. Kéo chuột để khoanh vùng. Bấm **Stop**, chờ thông báo đã lưu. File nằm tại `~/Videos/Recordings`. Âm thanh lấy từ **monitor của đầu ra loa**, mã hóa AAC; không tự bật micro. Chỉ chạy một phiên quay. Nút Pause bị vô hiệu vì backend wf-recorder không hỗ trợ tạm dừng.
 

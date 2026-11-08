@@ -109,7 +109,7 @@ StyledRect {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        onEntered: root.open()
+        onEntered: if (PopupHover.enabled) root.open()
         onClicked: root.open()
         onExited: hoverCloseTimer.restart()
         onPressedChanged: if (!pressed && !containsMouse) hoverCloseTimer.restart()

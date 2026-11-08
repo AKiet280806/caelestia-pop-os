@@ -169,6 +169,9 @@ ColumnLayout {
                         TilingToggle {
                             objectName: "taskbarWindowLayout"
                         }
+                        HoverToggle {
+                            objectName: "taskbarPopupHover"
+                        }
                     }
                 }
             }
